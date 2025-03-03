@@ -1,0 +1,90 @@
+﻿
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+
+
+
+html {
+    font-size: 16px;    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden auto;
+    font-family: "Poppins", sans-serif !important;
+    background-color: #5438DC ;
+}
+.image {
+    border-radius: 40px 0px 0px 40px;
+    box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.login {
+    padding: 133px 20px 25px 0px;
+    height:auto;
+    border-radius: 0px 40px 40px 00px;
+    box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.welcome {
+    font-size:20px;
+    background-color: white;
+    border-radius: 0px 20px 20px 0px;
+    width:200px;
+    height:auto;
+}
+.login-form{
+    padding-left:25px;
+}
+.btn-color {
+    color: #5438DC;
+    background-color: white;
+    font-size: 15px;
+    width: 90px;
+    border-radius: 40px;
+    transition: 0.5s;
+}
+    .btn-color:hover {
+        color: white;
+        border: solid white 1px;
+    }
+    .btn-link{
+        color:white;
+        text-decoration:none;
+        
+    }
+
+.forgot-password,
+.create-account {
+    position: relative;
+    text-decoration: none;
+    color: white; /* Bootstrap primary color */
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+    .forgot-password::after,
+    .create-account::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px; /* Adjust the gap between text and underline */
+        width: 0%;
+        height: 2px;
+        background-color: white;
+        transition: width 0.3s ease-in-out;
+    }
+
+    .forgot-password:hover,
+    .create-account:hover {
+        color:floralwhite; /* Darker shade on hover */
+    }
+
+        .forgot-password:hover::after,
+        .create-account:hover::after {
+            width: 100%;
+        }
