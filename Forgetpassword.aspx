@@ -58,6 +58,10 @@
      @media screen and (max-width: 1000px) {
          #bluredbg {
              display: none;
+            
+         }
+         img {
+             display:none;
          }
 
          #regis {

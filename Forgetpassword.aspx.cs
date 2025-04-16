@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
+using static System.Net.WebRequestMethods;
 
 namespace Online_Exam_System
 {
@@ -74,7 +76,7 @@ namespace Online_Exam_System
                     string otp = Utility.GenerateOtp();
                     Session["OTP"] = otp;
                     Session["OTP_Time"] = DateTime.Now;
-                    Session["Emailid"] = admin.Email;
+                    Session["Email"] = admin.Email;
                     SendMail sendMail = new SendMail()
                     {
                         Subject = "Password Reset OTP - Online Exam System",
@@ -130,7 +132,70 @@ namespace Online_Exam_System
                     if (txtOtp.Text == sessionOtp)
                     {
                         Response.Write("<script>alert('✅ OTP Matched');</script>");
-                        //Response.Redirect("ResetPassword.aspx");
+                        string username = Session["Emailid"].ToString();
+                        var recoverUser = dbo.Students.Where(x => x.Email == username).FirstOrDefault();
+                        if(recoverUser!=null)
+                        {
+                            string generatepass = Utility.PasswordGenarator();
+                            SendMail sendMail = new SendMail()
+                            {
+                                Subject = "🔐 Temporary Password - Online Exam System",
+                                ToEmail = username,
+                                Body = $@"
+                                       Dear {recoverUser.FullName},<br/><br/>
+                                       Your OTP has been successfully verified.<br/><br/>
+                                       A temporary password has been generated for your account. Please use the following credentials to log in:<br/><br/>
+                                       <strong>Email:</strong> {username}<br/>
+                                       <strong>Temporary Password:</strong> {generatepass}<br/><br/>
+                                      ⚠️ <strong>Important:</strong> After logging in, please go to your profile/settings and <strong>change your password</strong> immediately for security reasons.<br/><br/>
+                                      If you did not request a password reset, please ignore this email or contact support.<br/><br/>
+                                      Best regards,<br/>
+                                      <b>Online Exam System Team</b>"
+                            };
+                            SendMail sendMail1 = new SendMail();
+                            sendMail1.SendEmail(sendMail);
+                            recoverUser.PasswordHash = Utility.HashPassword(generatepass);
+                            if(dbo.SaveChanges()>0)
+                            {
+                                Response.Redirect("~/Student/StudentLogin.aspx");
+                            }
+
+                        }
+                        else
+                        {
+                            var recoveradmin = dbo.Admins.Where(x => x.Email == username).FirstOrDefault();
+                           if(recoveradmin!=null)
+                            {
+                                string generatepass = Utility.PasswordGenarator();
+                                SendMail sendMail = new SendMail()
+                                {
+                                    Subject = "🔐 Temporary Password - Online Exam System",
+                                ToEmail = username,
+                                Body = $@"
+                                       Dear {recoveradmin.FullName},<br/><br/>
+                                       Your OTP has been successfully verified.<br/><br/>
+                                       A temporary password has been generated for your account. Please use the following credentials to log in:<br/><br/>
+                                       <strong>Email:</strong> {username}<br/>
+                                       <strong>Temporary Password:</strong> {generatepass}<br/><br/>
+                                      ⚠️ <strong>Important:</strong> After logging in, please go to your profile/settings and <strong>change your password</strong> immediately for security reasons.<br/><br/>
+                                      If you did not request a password reset, please ignore this email or contact support.<br/><br/>
+                                      Best regards,<br/>
+                                      <b>Online Exam System Team</b>"
+                            };
+                            SendMail sendMail1 = new SendMail();
+                            sendMail1.SendEmail(sendMail);
+                                recoveradmin.PasswordHash = Utility.HashPassword(generatepass);
+                                if (dbo.SaveChanges() > 0)
+                                {
+                                    Response.Redirect("~/Admin/AdminLogin.aspx");
+                                }
+
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('❌ User Not Found');</script>");
+                            }
+                        }
                     }
                     else
                     {
@@ -139,8 +204,8 @@ namespace Online_Exam_System
                 }
                 else
                 {
-                    //Session.Remove("OTP");
-                    //Session.Remove("OTP_Time");
+                    Session.Remove("OTP");
+                    Session.Remove("OTP_Time");
                     Response.Write("<script>alert('⏰ OTP Expired');</script>");
                 }
             }

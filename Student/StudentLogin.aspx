@@ -38,7 +38,7 @@
  <p class="validators"> <asp:RequiredFieldValidator ID="RequiredFieldValidator2"  runat="server" ErrorMessage="Enter Your Password" ControlToValidate="pass" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator></p>
                      
                         <div class="text-end">
-                            <a class="btn-link forgot-password" href="#">Forgot Password?</a>
+                            <a class="btn-link forgot-password" href="<%= ResolveUrl("~/Forgetpassword.aspx") %>">Forgot Password?</a>
                         </div>
                        <br />
                         <div class="text-center">
