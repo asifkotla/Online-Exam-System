@@ -24,6 +24,16 @@
           <Property Name="Duration" Type="int" />
           <Property Name="ExamPassword" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="feedbackId" />
+          </Key>
+          <Property Name="feedbackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="feedback" Type="varchar(max)" Nullable="false" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
         <EntityType Name="Questions">
           <Key>
             <PropertyRef Name="QuestionID" />
@@ -36,6 +46,15 @@
           <Property Name="OptionC" Type="nvarchar" MaxLength="255" />
           <Property Name="OptionD" Type="nvarchar" MaxLength="255" />
           <Property Name="CorrectOption" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="StudentExamEnrollment">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="ExamID" Type="int" Nullable="false" />
+          <Property Name="EnrollmentDate" Type="datetime" />
         </EntityType>
         <EntityType Name="StudentResults">
           <Key>
@@ -52,11 +71,11 @@
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PRNNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProfileImage" Type="varbinary(max)" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PasswordHash" Type="varbinary(max)" />
-          <Property Name="ProfileImage" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <Association Name="FK__Exams__CreatedBy__3E52440B">
           <End Role="Admins" Type="Self.Admins" Multiplicity="0..1" />
@@ -79,6 +98,30 @@
             </Principal>
             <Dependent Role="Questions">
               <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentEx__ExamI__71D1E811">
+          <End Role="Exams" Type="Self.Exams" Multiplicity="1" />
+          <End Role="StudentExamEnrollment" Type="Self.StudentExamEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="StudentExamEnrollment">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentEx__Stude__70DDC3D8">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentExamEnrollment" Type="Self.StudentExamEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentExamEnrollment">
+              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -109,7 +152,9 @@
         <EntityContainer Name="OnlineeExamSystemModelStoreContainer">
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentExamEnrollment" EntityType="Self.StudentExamEnrollment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentResults" EntityType="Self.StudentResults" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Exams__CreatedBy__3E52440B" Association="Self.FK__Exams__CreatedBy__3E52440B">
@@ -119,6 +164,14 @@
           <AssociationSet Name="FK__Questions__ExamI__412EB0B6" Association="Self.FK__Questions__ExamI__412EB0B6">
             <End Role="Exams" EntitySet="Exams" />
             <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentEx__ExamI__71D1E811" Association="Self.FK__StudentEx__ExamI__71D1E811">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="StudentExamEnrollment" EntitySet="StudentExamEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentEx__Stude__70DDC3D8" Association="Self.FK__StudentEx__Stude__70DDC3D8">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentExamEnrollment" EntitySet="StudentExamEnrollment" />
           </AssociationSet>
           <AssociationSet Name="FK__StudentRe__ExamI__44FF419A" Association="Self.FK__StudentRe__ExamI__44FF419A">
             <End Role="Exams" EntitySet="Exams" />
@@ -155,7 +208,18 @@
           <Property Name="ExamPassword" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Admin" Relationship="Self.FK__Exams__CreatedBy__3E52440B" FromRole="Exams" ToRole="Admins" />
           <NavigationProperty Name="Questions" Relationship="Self.FK__Questions__ExamI__412EB0B6" FromRole="Exams" ToRole="Questions" />
+          <NavigationProperty Name="StudentExamEnrollments" Relationship="Self.FK__StudentEx__ExamI__71D1E811" FromRole="Exams" ToRole="StudentExamEnrollment" />
           <NavigationProperty Name="StudentResults" Relationship="Self.FK__StudentRe__ExamI__44FF419A" FromRole="Exams" ToRole="StudentResults" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="feedbackId" />
+          </Key>
+          <Property Name="feedbackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="feedback1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
@@ -170,6 +234,17 @@
           <Property Name="OptionD" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CorrectOption" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Exam" Relationship="Self.FK__Questions__ExamI__412EB0B6" FromRole="Questions" ToRole="Exams" />
+        </EntityType>
+        <EntityType Name="StudentExamEnrollment">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="ExamID" Type="Int32" Nullable="false" />
+          <Property Name="EnrollmentDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Exam" Relationship="Self.FK__StudentEx__ExamI__71D1E811" FromRole="StudentExamEnrollment" ToRole="Exams" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__StudentEx__Stude__70DDC3D8" FromRole="StudentExamEnrollment" ToRole="Students" />
         </EntityType>
         <EntityType Name="StudentResult">
           <Key>
@@ -188,11 +263,12 @@
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PRNNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProfileImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PasswordHash" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProfileImage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StudentExamEnrollments" Relationship="Self.FK__StudentEx__Stude__70DDC3D8" FromRole="Students" ToRole="StudentExamEnrollment" />
           <NavigationProperty Name="StudentResults" Relationship="Self.FK__StudentRe__Stude__440B1D61" FromRole="Students" ToRole="StudentResults" />
         </EntityType>
         <Association Name="FK__Exams__CreatedBy__3E52440B">
@@ -219,6 +295,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__StudentEx__ExamI__71D1E811">
+          <End Role="Exams" Type="Self.Exam" Multiplicity="1" />
+          <End Role="StudentExamEnrollment" Type="Self.StudentExamEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="StudentExamEnrollment">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__StudentRe__ExamI__44FF419A">
           <End Role="Exams" Type="Self.Exam" Multiplicity="0..1" />
           <End Role="StudentResults" Type="Self.StudentResult" Multiplicity="*" />
@@ -228,6 +316,18 @@
             </Principal>
             <Dependent Role="StudentResults">
               <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentEx__Stude__70DDC3D8">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentExamEnrollment" Type="Self.StudentExamEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentExamEnrollment">
+              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -243,10 +343,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OnlineeExamSystemEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OnlineeExamSystemEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Exams" EntityType="Self.Exam" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
           <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="StudentExamEnrollments" EntityType="Self.StudentExamEnrollment" />
           <EntitySet Name="StudentResults" EntityType="Self.StudentResult" />
           <EntitySet Name="Students" EntityType="Self.Student" />
           <AssociationSet Name="FK__Exams__CreatedBy__3E52440B" Association="Self.FK__Exams__CreatedBy__3E52440B">
@@ -257,9 +359,17 @@
             <End Role="Exams" EntitySet="Exams" />
             <End Role="Questions" EntitySet="Questions" />
           </AssociationSet>
+          <AssociationSet Name="FK__StudentEx__ExamI__71D1E811" Association="Self.FK__StudentEx__ExamI__71D1E811">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="StudentExamEnrollment" EntitySet="StudentExamEnrollments" />
+          </AssociationSet>
           <AssociationSet Name="FK__StudentRe__ExamI__44FF419A" Association="Self.FK__StudentRe__ExamI__44FF419A">
             <End Role="Exams" EntitySet="Exams" />
             <End Role="StudentResults" EntitySet="StudentResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentEx__Stude__70DDC3D8" Association="Self.FK__StudentEx__Stude__70DDC3D8">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentExamEnrollment" EntitySet="StudentExamEnrollments" />
           </AssociationSet>
           <AssociationSet Name="FK__StudentRe__Stude__440B1D61" Association="Self.FK__StudentRe__Stude__440B1D61">
             <End Role="Students" EntitySet="Students" />
@@ -271,7 +381,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OnlineeExamSystemModelStoreContainer" CdmEntityContainer="OnlineeExamSystemEntities">
+        <EntityContainerMapping StorageEntityContainer="OnlineeExamSystemModelStoreContainer" CdmEntityContainer="OnlineeExamSystemEntities1">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="OnlineeExamSystemModel.Admin">
               <MappingFragment StoreEntitySet="Admins">
@@ -293,6 +403,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="OnlineeExamSystemModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="feedbackId" ColumnName="feedbackId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="feedback1" ColumnName="feedback" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Questions">
             <EntityTypeMapping TypeName="OnlineeExamSystemModel.Question">
               <MappingFragment StoreEntitySet="Questions">
@@ -304,6 +425,16 @@
                 <ScalarProperty Name="OptionC" ColumnName="OptionC" />
                 <ScalarProperty Name="OptionD" ColumnName="OptionD" />
                 <ScalarProperty Name="CorrectOption" ColumnName="CorrectOption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentExamEnrollments">
+            <EntityTypeMapping TypeName="OnlineeExamSystemModel.StudentExamEnrollment">
+              <MappingFragment StoreEntitySet="StudentExamEnrollment">
+                <ScalarProperty Name="EnrollmentID" ColumnName="EnrollmentID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -322,11 +453,11 @@
             <EntityTypeMapping TypeName="OnlineeExamSystemModel.Student">
               <MappingFragment StoreEntitySet="Students">
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="PRNNumber" ColumnName="PRNNumber" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

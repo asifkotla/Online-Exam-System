@@ -17,16 +17,19 @@ namespace Online_Exam_System.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
+            this.StudentExamEnrollments = new HashSet<StudentExamEnrollment>();
             this.StudentResults = new HashSet<StudentResult>();
         }
     
         public int StudentID { get; set; }
-        public string PRNNumber { get; set; }
+        public byte[] ProfileImage { get; set; }
+        public string UserName { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
-        public string ProfileImage { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentExamEnrollment> StudentExamEnrollments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentResult> StudentResults { get; set; }
     }

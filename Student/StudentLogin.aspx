@@ -16,37 +16,43 @@
     <form id="form1" runat="server">
         <div id="container" class="container d-flex justify-content-center align-items-center vh-100 ">
             <div class="row justify-content-center align-items-center g-0">
-                <div class="col-md-5 ">
+                <div id="img" class="col-md-5 ">
                     <img src="../assets/4957136_4957136.jpg" class="img-fluid image" alt="Login Image" />
                 </div>
-                <div class="col-md-3     login">
+                <div class="col-md-4 login g-1">
                     <div>
                         <h3 class="welcome  ms-0">Welcome Back</h3>
                     </div>
-                    <div class="login-form">
+                    <div class="login-form ">
                         <h1>Student Login</h1>
                         <p>Login To Your Account</p>
-                        <input type="text" id="Username" value="" name="username" class="form-control" placeholder="Username" />
+                       <%-- <input type="text" id="Username" value="" name="username" class="form-control" placeholder="Username" />
+         --%>                  
+                        <asp:TextBox ID="UserName" CssClass="form-control" name="usermname" Placeholder="Enter Your Email Id"  runat="server"></asp:TextBox>
+                        <p class="validators"> <asp:RequiredFieldValidator ID="RequiredFieldValidator1"  runat="server" ErrorMessage="Enter email id" ControlToValidate="UserName" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator></p>
+                       
                         <br />
-                        <input type="password" id="password" value="" name="password" class="form-control" placeholder="Password" />
+                        <%--<input type="password" id="password" value="" name="password" class="form-control" placeholder="Password" />--%>
 
+                        <asp:TextBox ID="pass" CssClass="form-control" name="password" Placeholder="Enter Your Password" Type="password" runat="server"></asp:TextBox>
+ <p class="validators"> <asp:RequiredFieldValidator ID="RequiredFieldValidator2"  runat="server" ErrorMessage="Enter Your Password" ControlToValidate="pass" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator></p>
+                     
                         <div class="text-end">
                             <a class="btn-link forgot-password" href="#">Forgot Password?</a>
                         </div>
-                        <br />
+                       <br />
                         <div class="text-center">
-                            <input type="submit" id="submit" value="Login" class="btn btn-color" />
-                            <br />
-                            <br />
-                            <br />
-                            <a class="btn-link create-account" href="../Register.aspx">Create Account</a>
+                           <%-- <input type="submit" id="submit" value="Login" class="btn btn-color" />--%>
+                             <asp:Button ID="submit" CssClass="btn btn-color" runat="server" Text="Login" OnClick="StudentLogin1" BorderStyle="None" />
+                          <br />
+                            <a class="btn-link create-account " href="../Register.aspx">Create Account</a>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-        </div>
+     </div>
 
 
     </form>

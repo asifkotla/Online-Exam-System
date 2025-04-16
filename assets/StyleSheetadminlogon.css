@@ -4,13 +4,14 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;  
+    box-sizing: border-box;
 }
 
 
 
 html {
-    font-size: 16px;    height: 100%;
+    font-size: 16px;
+    height: 100%;
 }
 
 body {
@@ -18,21 +19,23 @@ body {
     width: 100vw;
     overflow: hidden auto;
     font-family: "Poppins", sans-serif !important;
-    background-color: #5438DC ;
+    background-color: #49B6FF;
 }
+
 .image {
     border-radius: 40px 0px 0px 40px;
     box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.5);
     min-height: 540px;
 }
+
 .login {
     padding: 20px 20px 25px 0px;
-    min-height:540px;
+    min-height: 540px;
     border-radius: 0px 40px 40px 00px;
     box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-   
+
 .welcome {
     font-size: 20px;
     margin-bottom: 95px;
@@ -43,10 +46,11 @@ body {
     text-align: center;
     line-height: 50px;
 }
-.login-form{
-    padding-left:25px;
-   
+
+.login-form {
+    padding-left: 25px;
 }
+
 .btn-color {
     color: #5438DC;
     background-color: white;
@@ -55,19 +59,20 @@ body {
     border-radius: 40px;
     transition: 0.5s;
 }
+
     .btn-color:hover {
         color: white;
         border: solid white 1px;
     }
-    .btn-link{
-        color:white;
-        text-decoration:none;
 
-        
-    }
-.create-account{
-    position:relative;
-    top:30px;
+.btn-link {
+    color: white;
+    text-decoration: none;
+}
+
+.create-account {
+    position: relative;
+    top: 30px;
 }
 
 .forgot-password,
@@ -93,13 +98,14 @@ body {
 
     .forgot-password:hover,
     .create-account:hover {
-        color:floralwhite; /* Darker shade on hover */
+        color: floralwhite; /* Darker shade on hover */
     }
 
         .forgot-password:hover::after,
         .create-account:hover::after {
             width: 100%;
         }
+
 @media screen and (max-width: 1000px) {
     #img {
         display: none;
@@ -118,7 +124,7 @@ body {
         border-radius: 20px;
         box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
         width: 90vw;
-        height:auto;
+        height: auto;
     }
 
     .welcome {
@@ -148,5 +154,3 @@ body {
         top: 10px;
     }
 }
-
-

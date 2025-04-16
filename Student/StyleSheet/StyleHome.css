@@ -127,7 +127,7 @@ nav {
         color: white !important;
     }
 
-.form1 a {
+.form1 .custom-btn {
     display: inline-block !important;
     width: 180px !important;
     height: 50px !important;
@@ -142,10 +142,10 @@ nav {
     transition: 0.3s ease-in-out !important;
 }
 
-    .form1 a:hover {
-        background-color: #0096c7 !important;
-        color: white !important;
-    }
+.form1 .custom-btn:hover {
+    background-color: #0096c7 !important;
+    color: white !important;
+}
 
 
 /* Features Section */

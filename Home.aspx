@@ -87,7 +87,7 @@
             <p>Generate detailed exam reports in PDF format.</p>
         </div>
     </section>
-    <%--About--%>
+         <%--About--%>
     <section id="about" class="about-section">
         <div class="container">
             <div class="row align-items-center">
@@ -124,24 +124,42 @@
                         loop autoplay>
                     </lottie-player>
                 </div>
+             
                 <div class="col-md-5 ">
                     <br />
+                   
+
+                
                     <h1>Give Your Valuable Feedback </h1>
                     <br />
+
                     <label for="Name" class="form-label">Enter Your Full Name</label>
-                    <input type="text" class="form-control" id="Name" name="Name" />
+                    <asp:TextBox ID="Name" CssClass="form-control" name="Name"  runat="server"></asp:TextBox>
+                    <p class="validators"> <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Enter Your Name" ControlToValidate="Name" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator></p>
+                   
                     <label for="Email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="Email" />
+                    <asp:TextBox ID="email" CssClass="form-control" name="Email" runat="server"></asp:TextBox>
+                    <p class="validators"><asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter Valid Email Addreess(eg.xyz01@xyz.com)" ControlToValidate="email" Display="Dynamic" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="email" Display="Dynamic" ErrorMessage="Please Enter Your Email" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </p>
+                    <p class="validators">&nbsp;</p>
+                   
                     <label for="feedback" class="form-label">Feedback</label>
-                    <textarea style="min-height: 150px;" type="text" class="form-control" id="feedback" name="feedback"></textarea>
+                    <asp:TextBox ID="feedback" CssClass="form-control" name="feedback" runat="server" Rows="4" TextMode="MultiLine"></asp:TextBox>
+                    <p="validators">
+                       
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="feedback" Display="Dynamic" ErrorMessage="Enter Feedback" ForeColor="Red"></asp:RequiredFieldValidator>
+                    </p>
                     <br />
-                    <a href="#" class="custom-btn">Submit</a>
+                     <asp:Button ID="Button1" CssClass="custom-btn" runat="server" Text="Submit" OnClick="Button1Submit_Click" BorderStyle="None" />
+                    
+                      
                 </div>
             </div>
         </div>
     </section>
-    <%--footer--%>
-    <!-- Remove the container if you want to extend the Footer to full width. -->
+         <%--footer--%>
+
     <div class="my-5">
         <!-- Footer -->
         <footer

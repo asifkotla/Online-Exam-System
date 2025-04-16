@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Online_Exam_System.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,9 @@ namespace Online_Exam_System
 {
     public partial class Home : System.Web.UI.Page
     {
+
+        OnlineeExamSystemEntities1 dbo=new OnlineeExamSystemEntities1();  
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -24,6 +28,24 @@ namespace Online_Exam_System
         protected void LoadRegisterPage(object sender, EventArgs e)
         {
             Response.Redirect("Register.aspx");
+        }
+        protected void Button1Submit_Click(object sender, EventArgs e)
+        {
+            Feedback fd= new Feedback();    
+            fd.Name=Name.Text;
+            fd.Email=email.Text;
+            fd.feedback1=feedback.Text;
+            fd.Date = DateTime.Now;
+            dbo.Feedbacks.Add(fd);
+            
+            if(dbo.SaveChanges()>0)
+            {
+                Response.Write("<script>alert(' ✅ Thank You For Your FeedBack');</script>");
+            }
+            else
+            {
+                Response.Write("<script>alert(' ❎ Something Went Wrong Please Try Again!!!');</script>");
+            }
         }
 
     }
