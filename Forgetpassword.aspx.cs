@@ -105,7 +105,7 @@ namespace Online_Exam_System
                         btnRegister.Enabled = false;
                         lblTimer.Visible = true;
 
-                        /
+                        
                         ViewState["RemainingSeconds"] = 180;
                         Timer1.Enabled = true;
 
