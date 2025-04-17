@@ -31,7 +31,7 @@ namespace Online_Exam_System
                 string otp = Utility.GenerateOtp();
                 Session["OTP"] = otp;
                 Session["OTP_Time"] = DateTime.Now;
-                Session["Emailid"] = user.Email;
+                Session["Email"] = user.Email;
                 SendMail sendMail = new SendMail()
                 {
                     Subject = "Password Reset OTP - Online Exam System",
@@ -132,7 +132,7 @@ namespace Online_Exam_System
                     if (txtOtp.Text == sessionOtp)
                     {
                         Response.Write("<script>alert('✅ OTP Matched');</script>");
-                        string username = Session["Emailid"].ToString();
+                        string username = Session["Email"].ToString();
                         var recoverUser = dbo.Students.Where(x => x.Email == username).FirstOrDefault();
                         if(recoverUser!=null)
                         {

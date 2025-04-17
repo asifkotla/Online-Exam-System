@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\AdminDasboard.aspx" />
     <Content Include="Admin\AdminLogin.aspx" />
     <Content Include="App_Data\herobanner.jpg" />
     <Content Include="assets\3275434.jpg" />
@@ -128,6 +129,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminDasboard.aspx.cs">
+      <DependentUpon>AdminDasboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminDasboard.aspx.designer.cs">
+      <DependentUpon>AdminDasboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\AdminLogin.aspx.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

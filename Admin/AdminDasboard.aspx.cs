@@ -8,15 +8,15 @@ using System.Web.UI.WebControls;
 
 namespace Online_Exam_System.Admin
 {
-    public partial class AdminPanel : System.Web.UI.MasterPage
+    public partial class AdminDasboard : System.Web.UI.Page
     {
         OnlineeExamSystemEntities1 dbo = new OnlineeExamSystemEntities1();
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = Session["Emailid"].ToString();
-            var adminuser = dbo.Admins.Where(x => x.Email == email).FirstOrDefault();
-            Label1.Text = adminuser.FullName;
+          int cntUser=dbo.Students.Count(); 
+           Label1.Text = cntUser.ToString();
+            int cntExam=dbo.Exams.Count();
+            Label2.Text = cntExam.ToString();
         }
     }
-    
 }
