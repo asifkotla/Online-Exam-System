@@ -82,7 +82,6 @@
     <Content Include="assets\6310507.jpg" />
     <Content Include="assets\8262066.jpg" />
     <Content Include="assets\9129514.jpg" />
-    <Content Include="assets\register.js" />
     <Content Include="assets\rm222batch3-mind-06.jpg" />
     <Content Include="assets\StyleSheetadminlogon.css" />
     <Content Include="assets\StylestdLogin.css" />
@@ -135,6 +134,13 @@
     </Compile>
     <Compile Include="Admin\AdminLogin.aspx.designer.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AdminPanel.Master.cs">
+      <DependentUpon>AdminPanel.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminPanel.Master.designer.cs">
+      <DependentUpon>AdminPanel.Master</DependentUpon>
     </Compile>
     <Compile Include="Forgetpassword.aspx.cs">
       <DependentUpon>Forgetpassword.aspx</DependentUpon>
@@ -232,6 +238,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Admin\AdminPanel.Master" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
