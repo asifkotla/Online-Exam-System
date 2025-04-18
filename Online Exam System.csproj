@@ -77,6 +77,10 @@
   <ItemGroup>
     <Content Include="Admin\AdminDasboard.aspx" />
     <Content Include="Admin\AdminLogin.aspx" />
+    <Content Include="Admin\Exam Analsis.aspx" />
+    <Content Include="Admin\Manage Exams.aspx" />
+    <Content Include="Admin\ManageUser.aspx" />
+    <Content Include="Admin\Results.aspx" />
     <Content Include="App_Data\herobanner.jpg" />
     <Content Include="assets\3275434.jpg" />
     <Content Include="assets\4957136_4957136.jpg" />
@@ -117,6 +121,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Register.aspx" />
+    <Content Include="Reply.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -149,6 +154,34 @@
     </Compile>
     <Compile Include="Admin\AdminPanel.Master.designer.cs">
       <DependentUpon>AdminPanel.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Exam Analsis.aspx.cs">
+      <DependentUpon>Exam Analsis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Exam Analsis.aspx.designer.cs">
+      <DependentUpon>Exam Analsis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Manage Exams.aspx.cs">
+      <DependentUpon>Manage Exams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Manage Exams.aspx.designer.cs">
+      <DependentUpon>Manage Exams.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ManageUser.aspx.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageUser.aspx.designer.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Results.aspx.cs">
+      <DependentUpon>Results.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Results.aspx.designer.cs">
+      <DependentUpon>Results.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forgetpassword.aspx.cs">
       <DependentUpon>Forgetpassword.aspx</DependentUpon>
@@ -210,6 +243,13 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reply.aspx.cs">
+      <DependentUpon>Reply.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reply.aspx.designer.cs">
+      <DependentUpon>Reply.aspx</DependentUpon>
     </Compile>
     <Compile Include="SendMail.cs" />
     <Compile Include="Student\StudentLogin.aspx.cs">

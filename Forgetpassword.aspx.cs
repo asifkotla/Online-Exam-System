@@ -137,11 +137,13 @@ namespace Online_Exam_System
                         if(recoverUser!=null)
                         {
                             string generatepass = Utility.PasswordGenarator();
-                            SendMail sendMail = new SendMail()
+                            try
                             {
-                                Subject = "🔐 Temporary Password - Online Exam System",
-                                ToEmail = username,
-                                Body = $@"
+                                SendMail sendMail = new SendMail()
+                                {
+                                    Subject = "🔐 Temporary Password - Online Exam System",
+                                    ToEmail = username,
+                                    Body = $@"
                                        Dear {recoverUser.FullName},<br/><br/>
                                        Your OTP has been successfully verified.<br/><br/>
                                        A temporary password has been generated for your account. Please use the following credentials to log in:<br/><br/>
@@ -151,9 +153,15 @@ namespace Online_Exam_System
                                       If you did not request a password reset, please ignore this email or contact support.<br/><br/>
                                       Best regards,<br/>
                                       <b>Online Exam System Team</b>"
-                            };
-                            SendMail sendMail1 = new SendMail();
-                            sendMail1.SendEmail(sendMail);
+                                };
+                                SendMail sendMail1 = new SendMail();
+                                sendMail1.SendEmail(sendMail);
+                                Response.Write("<script>alert('Email sent successfully');window.close();</script>");
+                            }
+                            catch (Exception ex)
+                            {
+                                Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                            }
                             recoverUser.PasswordHash = Utility.HashPassword(generatepass);
                             if(dbo.SaveChanges()>0)
                             {
@@ -167,11 +175,15 @@ namespace Online_Exam_System
                            if(recoveradmin!=null)
                             {
                                 string generatepass = Utility.PasswordGenarator();
-                                SendMail sendMail = new SendMail()
+                                try
                                 {
-                                    Subject = "🔐 Temporary Password - Online Exam System",
-                                ToEmail = username,
-                                Body = $@"
+
+
+                                    SendMail sendMail = new SendMail()
+                                    {
+                                        Subject = "🔐 Temporary Password - Online Exam System",
+                                        ToEmail = username,
+                                        Body = $@"
                                        Dear {recoveradmin.FullName},<br/><br/>
                                        Your OTP has been successfully verified.<br/><br/>
                                        A temporary password has been generated for your account. Please use the following credentials to log in:<br/><br/>
@@ -181,9 +193,15 @@ namespace Online_Exam_System
                                       If you did not request a password reset, please ignore this email or contact support.<br/><br/>
                                       Best regards,<br/>
                                       <b>Online Exam System Team</b>"
-                            };
-                            SendMail sendMail1 = new SendMail();
-                            sendMail1.SendEmail(sendMail);
+                                    };
+                                    SendMail sendMail1 = new SendMail();
+                                    sendMail1.SendEmail(sendMail);
+                                    Response.Write("<script>alert('Email sent successfully');window.close();</script>");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
+                                }
                                 recoveradmin.PasswordHash = Utility.HashPassword(generatepass);
                                 if (dbo.SaveChanges() > 0)
                                 {

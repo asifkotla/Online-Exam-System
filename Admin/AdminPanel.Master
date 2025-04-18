@@ -87,12 +87,12 @@
                 <h4 class="text-center">Admin Panel</h4>
                 <p class="text-center">&nbsp;</p>
                
-                <a href="#">Home</a>
-                <a href="#">Manage Users</a>
-                <a href="#">Manage Exams</a>
-                <a href="#">Exam Analsis</a>
-                <a href="#">Results</a>
-                <a href="#">Logout</a>
+                <a href="AdminDasboard.aspx">Home</a>
+                <a href="ManageUser.aspx">Manage Users</a>
+                <a href="Manage Exams.aspx">Manage Exams</a>
+                <a href="Exam Analsis.aspx">Exam Analsis</a>
+                <a href="Results.aspx">Results</a>
+            
             </div>
 
             <!-- Content Area -->
@@ -101,7 +101,8 @@
                 <div class="topbar">
                     <h4>Welcome, <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                     </h4>
-                    <button class="btn btn-danger">Logout</button>
+                    <asp:Button runat="server" ID="btnLogout" Text="Logout" CssClass="btn btn-danger" OnClick="Logout" />
+
                 </div>
 
                 <!-- Main Content -->

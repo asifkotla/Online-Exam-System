@@ -26,6 +26,7 @@ namespace Online_Exam_System.Admin
                 LineChart();
                 BindStudents();
                 RoundChart();
+                BindFeedBack();
 
 
             }
@@ -43,6 +44,11 @@ namespace Online_Exam_System.Admin
         {
             gvStudents.PageIndex = e.NewPageIndex;
             BindStudents(); // Rebind data
+        }
+        protected void gvStudents_PageIndexChanging1(object sender, GridViewPageEventArgs e)
+        {
+            gvStudents.PageIndex = e.NewPageIndex;
+            BindFeedBack(); // Rebind data
         }
         private void LineChart()
         {
@@ -160,6 +166,20 @@ namespace Online_Exam_System.Admin
             litChartScript.Text = script;
            
 
+        }
+        private void BindFeedBack()
+        {
+            var feedback = dbo.Feedbacks.OrderByDescending(x=>x.Date).ToList();
+            FeedBack.DataSource = feedback;
+            FeedBack.DataBind();
+        }
+        protected void btnReply_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            string email = btn.CommandArgument;
+            Session["ReplyEmail"] = email;
+            Response.Redirect("~/Reply.aspx");
         }
     }
 }           

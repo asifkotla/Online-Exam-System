@@ -18,6 +18,11 @@ namespace Online_Exam_System.Admin
             //var adminuser = dbo.Admins.Where(x => x.Email == email).FirstOrDefault();
             //Label1.Text = adminuser.FullName;
         }
+        protected void Logout(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("~/Home.aspx");
+        }
     }
     
 }
