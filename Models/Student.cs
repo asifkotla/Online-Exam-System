@@ -27,6 +27,7 @@ namespace Online_Exam_System.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
+        public System.DateTime RegisterDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentExamEnrollment> StudentExamEnrollments { get; set; }

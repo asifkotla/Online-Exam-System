@@ -13,9 +13,10 @@ namespace Online_Exam_System.Admin
         OnlineeExamSystemEntities1 dbo = new OnlineeExamSystemEntities1();
         protected void Page_Load(object sender, EventArgs e)
         {
-            string email = Session["Emailid"].ToString();
-            var adminuser = dbo.Admins.Where(x => x.Email == email).FirstOrDefault();
-            Label1.Text = adminuser.FullName;
+            
+            ////string email = Session["Emailid"].ToString();
+            //var adminuser = dbo.Admins.Where(x => x.Email == email).FirstOrDefault();
+            //Label1.Text = adminuser.FullName;
         }
     }
     

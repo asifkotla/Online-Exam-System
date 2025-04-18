@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnlineeExamSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OnlineeExamSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admins">
           <Key>
             <PropertyRef Name="AdminID" />
@@ -76,6 +76,7 @@
           <Property Name="FullName" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PasswordHash" Type="varbinary(max)" />
+          <Property Name="RegisterDate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__Exams__CreatedBy__3E52440B">
           <End Role="Admins" Type="Self.Admins" Multiplicity="0..1" />
@@ -182,8 +183,7 @@
             <End Role="StudentResults" EntitySet="StudentResults" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineeExamSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -270,6 +270,7 @@
           <Property Name="PasswordHash" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="StudentExamEnrollments" Relationship="Self.FK__StudentEx__Stude__70DDC3D8" FromRole="Students" ToRole="StudentExamEnrollment" />
           <NavigationProperty Name="StudentResults" Relationship="Self.FK__StudentRe__Stude__440B1D61" FromRole="Students" ToRole="StudentResults" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK__Exams__CreatedBy__3E52440B">
           <End Role="Admins" Type="Self.Admin" Multiplicity="0..1" />
@@ -452,6 +453,7 @@
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="OnlineeExamSystemModel.Student">
               <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

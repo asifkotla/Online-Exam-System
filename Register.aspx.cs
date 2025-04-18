@@ -57,6 +57,7 @@ namespace Online_Exam_System
 
                 Online_Exam_System.Models.Student student = new Online_Exam_System.Models.Student()
                 {
+                    RegisterDate = DateTime.Now,    
                     UserName = userName,
                     FullName = name,
                     Email = email,
