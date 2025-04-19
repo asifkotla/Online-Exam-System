@@ -4,6 +4,7 @@
     DashBoard
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+ 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
@@ -47,6 +48,14 @@
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+  
+<div id="myCustomLoader" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,0.6);">
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);">
+        <img src="../assets/Infinite Loader.gif" alt="Loading..." style="width:80px; height:80px;" />
+    </div>
+</div>
+
 
     <div class="d-flex justify-content-between aling-items-center mb-3">
         <h2 class="mb-0">Dashboard Overview</h2>
@@ -183,12 +192,11 @@
                    <asp:BoundField DataField="Name" HeaderText="Name" />
                    <asp:BoundField DataField="Email" HeaderText="Email" />
                    <asp:BoundField DataField="feedback1" HeaderText="Feedback" />
-
-                 <%--  <asp:BoundField DataField="UserName" HeaderText="User Name" />--%>
                     <asp:TemplateField HeaderText="Action">
                 <ItemTemplate>
                     <asp:Button ID="btnReply" runat="server" Text="Send Reply"
                           OnClick="btnReply_Click"
+                   
                         CommandName="Reply" CommandArgument='<%# Eval("Email") %>'
                         CssClass="btn btn-primary btn-sm" />
                 </ItemTemplate>
