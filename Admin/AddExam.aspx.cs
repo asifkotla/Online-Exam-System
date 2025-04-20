@@ -56,12 +56,15 @@ namespace Online_Exam_System.Admin
                                 Response.Write("<script>alert('❌ Invalid exam date');</script>");
                                 return;
                             }
+                            string rawValue = table.Rows[1][4].ToString().Trim();
 
-                            if (!TimeSpan.TryParse(table.Rows[1][4].ToString(), out TimeSpan startTime))
+                            if (!DateTime.TryParse(rawValue, out DateTime dateTime))
                             {
                                 Response.Write("<script>alert('❌ Invalid start time');</script>");
                                 return;
                             }
+
+                            TimeSpan startTime = dateTime.TimeOfDay;
 
                             var exam = new Exam
                             {
