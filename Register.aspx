@@ -84,7 +84,7 @@
                     <div class="form-group mb-3">
 
                         <label for="txtPRN">UserName&nbsp;&nbsp;&nbsp; </label>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtPRN" Display="Dynamic" ErrorMessage="PRN Number Cannot be Empty" ForeColor="Red">PRN Number Cannot be Empty</asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtPRN" Display="Dynamic" ErrorMessage="User Name Cannot be Empty" ForeColor="Red">User Name Cannot be Empty</asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtPRN" runat="server" CssClass="form-control" required="true" />
 
                         <label for="txtFullName">Full Name&nbsp;&nbsp;&nbsp; </label>

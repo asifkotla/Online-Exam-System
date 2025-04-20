@@ -153,10 +153,10 @@ namespace Online_Exam_System.Admin
                 PdfFont boldFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
                 // Heading
                 Paragraph heading = new Paragraph("All Students List")
-       .SetTextAlignment(TextAlignment.CENTER)
-       .SetFontSize(16)
-       .SetFont(boldFont)
-       .SetMarginBottom(20);
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetFontSize(16)
+                .SetFont(boldFont)
+                .SetMarginBottom(20);
                 doc.Add(heading);
 
                 // Table

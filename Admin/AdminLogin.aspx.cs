@@ -28,6 +28,7 @@ namespace Online_Exam_System.Admin
                 {
                     Response.Write("<script>alert(' ✅ Succesfully Logged In');</script>");
                     Session["Emailid"] = admin.Email;
+                    Session["adminId"] = admin.AdminID;
                     Response.Redirect("~/Admin/AdminDasboard.aspx");
                     
                 }

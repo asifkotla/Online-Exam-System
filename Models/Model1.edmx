@@ -23,6 +23,8 @@
           <Property Name="CreatedBy" Type="int" />
           <Property Name="Duration" Type="int" />
           <Property Name="ExamPassword" Type="varbinary(max)" />
+          <Property Name="ExamDate" Type="date" />
+          <Property Name="StartTime" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -210,6 +212,8 @@
           <NavigationProperty Name="Questions" Relationship="Self.FK__Questions__ExamI__412EB0B6" FromRole="Exams" ToRole="Questions" />
           <NavigationProperty Name="StudentExamEnrollments" Relationship="Self.FK__StudentEx__ExamI__71D1E811" FromRole="Exams" ToRole="StudentExamEnrollment" />
           <NavigationProperty Name="StudentResults" Relationship="Self.FK__StudentRe__ExamI__44FF419A" FromRole="Exams" ToRole="StudentResults" />
+          <Property Name="ExamDate" Type="DateTime" Precision="0" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -396,6 +400,8 @@
           <EntitySetMapping Name="Exams">
             <EntityTypeMapping TypeName="OnlineeExamSystemModel.Exam">
               <MappingFragment StoreEntitySet="Exams">
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
                 <ScalarProperty Name="ExamID" ColumnName="ExamID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

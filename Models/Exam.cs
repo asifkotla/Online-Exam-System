@@ -27,6 +27,8 @@ namespace Online_Exam_System.Models
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> Duration { get; set; }
         public byte[] ExamPassword { get; set; }
+        public Nullable<System.DateTime> ExamDate { get; set; }
+        public Nullable<System.TimeSpan> StartTime { get; set; }
     
         public virtual Admin Admin { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
