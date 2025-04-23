@@ -12,15 +12,12 @@ namespace Online_Exam_System.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentExamEnrollment
+    public partial class sysdiagram
     {
-        public int EnrollmentID { get; set; }
-        public int StudentID { get; set; }
-        public int ExamID { get; set; }
-        public Nullable<System.DateTime> EnrollmentDate { get; set; }
-        public Nullable<bool> IsExamCompleted { get; set; }
-    
-        public virtual Exam Exam { get; set; }
-        public virtual Student Student { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

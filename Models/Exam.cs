@@ -24,8 +24,8 @@ namespace Online_Exam_System.Models
     
         public int ExamID { get; set; }
         public string Title { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<int> Duration { get; set; }
+        public int CreatedBy { get; set; }
+        public int Duration { get; set; }
         public byte[] ExamPassword { get; set; }
         public Nullable<System.DateTime> ExamDate { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
@@ -37,5 +37,7 @@ namespace Online_Exam_System.Models
         public virtual ICollection<StudentExamEnrollment> StudentExamEnrollments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentResult> StudentResults { get; set; }
+        public virtual Exam Exams1 { get; set; }
+        public virtual Exam Exam1 { get; set; }
     }
 }

@@ -4,18 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="30f9c947ca174c47894700497ec45524" Name="Diagram1">
-        <EntityTypeShape EntityType="OnlineeExamSystemModel.Admin" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineeExamSystemModel.Exam" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineeExamSystemModel.Feedback" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineeExamSystemModel.Question" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+      <Diagram DiagramId="8de766aeb7fd439a9f08396e7354d86c" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineeExamSystemModel.Admin" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineeExamSystemModel.Exam" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineeExamSystemModel.Feedback" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineeExamSystemModel.Question" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineeExamSystemModel.StudentExamEnrollment" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineeExamSystemModel.StudentResult" Width="1.5" PointX="8.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineeExamSystemModel.StudentResult" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="OnlineeExamSystemModel.Student" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineeExamSystemModel.sysdiagram" Width="1.5" PointX="2.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="OnlineeExamSystemModel.FK__Exams__CreatedBy__3E52440B" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineeExamSystemModel.FK__Questions__ExamI__412EB0B6" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentEx__ExamI__71D1E811" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentRe__ExamI__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineeExamSystemModel.FK_Exams_Exams" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentEx__Stude__70DDC3D8" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentRe__Stude__440B1D61" ManuallyRouted="false" />
       </Diagram>

@@ -32,5 +32,6 @@ namespace Online_Exam_System.Models
         public virtual DbSet<StudentExamEnrollment> StudentExamEnrollments { get; set; }
         public virtual DbSet<StudentResult> StudentResults { get; set; }
         public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

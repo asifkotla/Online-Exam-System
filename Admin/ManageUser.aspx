@@ -34,7 +34,7 @@
         <div class="col mx-auto">
             <div class="card shadow rounded-4 border-0">
                <div class="card-header d-flex justify-content-between align-items-center bg-white text-black rounded-top-4">
-    <h4 class="mb-0 text-center text-md-start fw-semibold">Last 10 Registered Students</h4>
+    <h4 class="mb-0 text-center text-md-start fw-semibold">All Students</h4>
 
     <div class="d-flex align-items-center gap-2">
       

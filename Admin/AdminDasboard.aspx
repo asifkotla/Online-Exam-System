@@ -56,12 +56,13 @@
     </div>
 </div>
 
-
+      <a href="AddExam.aspx" style="text-decoration: none;">
     <div class="d-flex justify-content-between aling-items-center mb-3">
         <h2 class="mb-0">Dashboard Overview</h2>
-        <button class="  btn btn-primary btnadd  "><i class="fa-solid fa-plus text-primary  cust"></i> Add Exam</button>
+       
+        <div class="btn btn-primary btnadd  "><i class="fa-solid fa-plus text-primary  cust"></i> Add Exam</div>
     </div>
-
+          </a>
     <div class="row g-3 mb-4">
         <div class="col-md-4">
             <div class="card-box card-blue text-center">
@@ -178,7 +179,7 @@
      <div class="row ">
             <div class="card shadow rounded-4 border-0">
        <div class="card-header bg-white text-black rounded-top-4">
-           <h4 class="mb-0 text-center text-md-start fw-semibold">Last 10 Registered Students</h4>
+           <h4 class="mb-0 text-center text-md-start fw-semibold">User Feedbacks</h4>
        </div>
        <div class="card-body p-0">
            <asp:GridView ID="FeedBack" runat="server" AutoGenerateColumns="false"
