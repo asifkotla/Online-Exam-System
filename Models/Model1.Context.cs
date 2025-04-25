@@ -62,5 +62,10 @@ namespace Online_Exam_System.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStudentExamAnalysis_Result>("GetStudentExamAnalysis", examIDParameter);
         }
+    
+        public virtual ObjectResult<GetOverallResultCounts_Result> GetOverallResultCounts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetOverallResultCounts_Result>("GetOverallResultCounts");
+        }
     }
 }

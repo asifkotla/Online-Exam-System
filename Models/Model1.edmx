@@ -182,6 +182,7 @@
         <Function Name="GetExamStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ExamID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetOverallResultCounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ExamID" Type="int" Mode="In" />
         </Function>
@@ -464,6 +465,7 @@
           <FunctionImport Name="GetStudentExamAnalysis" ReturnType="Collection(OnlineeExamSystemModel.GetStudentExamAnalysis_Result)">
           <Parameter Name="ExamID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetOverallResultCounts" ReturnType="Collection(OnlineeExamSystemModel.GetOverallResultCounts_Result)" />
         </EntityContainer>
         <ComplexType Name="GetExamStats_Result">
           <Property Type="Int32" Name="TotalCandidates" Nullable="true" />
@@ -479,6 +481,12 @@
           <Property Type="Int32" Name="TotalCorrect" Nullable="true" />
           <Property Type="Int32" Name="TotalWrong" Nullable="true" />
           <Property Type="String" Name="Results" Nullable="false" MaxLength="9" />
+        </ComplexType>
+        <ComplexType Name="GetOverallResultCounts_Result">
+          <Property Type="Int32" Name="TotalStudents" Nullable="true" />
+          <Property Type="Int32" Name="Merit" Nullable="true" />
+          <Property Type="Int32" Name="Passed" Nullable="true" />
+          <Property Type="Int32" Name="Failed" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -601,6 +609,16 @@
                 <ScalarProperty Name="TotalCorrect" ColumnName="TotalCorrect" />
                 <ScalarProperty Name="TotalWrong" ColumnName="TotalWrong" />
                 <ScalarProperty Name="Results" ColumnName="Results" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetOverallResultCounts" FunctionName="OnlineeExamSystemModel.Store.GetOverallResultCounts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineeExamSystemModel.GetOverallResultCounts_Result">
+                <ScalarProperty Name="TotalStudents" ColumnName="TotalStudents" />
+                <ScalarProperty Name="Merit" ColumnName="Merit" />
+                <ScalarProperty Name="Passed" ColumnName="Passed" />
+                <ScalarProperty Name="Failed" ColumnName="Failed" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

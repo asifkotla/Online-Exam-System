@@ -133,10 +133,14 @@ namespace Online_Exam_System.Admin
         }
         private void RoundChart()
         {
-            int merit = 76;
-            int passed = 68;
-            int failed = 15;
-
+            
+            var cnts = dbo.GetOverallResultCounts().FirstOrDefault();
+            int merit = int.Parse(cnts.Merit.ToString());
+            int passed = int.Parse(cnts.Passed.ToString());
+            int failed = int.Parse(cnts.Failed.ToString());
+            Label4.Text = cnts.Passed.ToString();
+            Label5.Text = cnts.Merit.ToString();
+            Label6.Text = cnts.Failed.ToString();
             // Injecting the Chart.js script with dynamic values
             string script = $@"
                               <script>
