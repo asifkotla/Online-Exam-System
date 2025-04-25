@@ -227,7 +227,6 @@
     <Content Include="Admin\Manage Exams.aspx" />
     <Content Include="Admin\ManageUser.aspx" />
     <Content Include="Admin\Profile.aspx" />
-    <Content Include="Admin\Results.aspx" />
     <Content Include="App_Data\herobanner.jpg" />
     <Content Include="assets\3275434.jpg" />
     <Content Include="assets\4957136_4957136.jpg" />
@@ -348,13 +347,6 @@
     <Compile Include="Admin\Profile.aspx.designer.cs">
       <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Results.aspx.cs">
-      <DependentUpon>Results.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Results.aspx.designer.cs">
-      <DependentUpon>Results.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Forgetpassword.aspx.cs">
       <DependentUpon>Forgetpassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -381,6 +373,12 @@
     <Compile Include="Models\Feedback.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetExamStats_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetStudentExamAnalysis_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -399,6 +397,7 @@
     <Compile Include="Models\Question.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\stat.cs" />
     <Compile Include="Models\Student.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -12,7 +12,7 @@ namespace Online_Exam_System
 {
     public partial class Forgetpassword : System.Web.UI.Page
     { 
-        OnlineeExamSystemEntities1 dbo=new OnlineeExamSystemEntities1();
+        OnlineeExamSystemEntities2 dbo=new OnlineeExamSystemEntities2();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["OTP"] != null)

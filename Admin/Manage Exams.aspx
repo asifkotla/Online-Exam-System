@@ -70,7 +70,7 @@
 
                     <div class="d-flex align-items-center gap-2">
 
-                        <asp:TextBox ID="SearchBox" AutoPostBack="true" placeholder="Search By Titlr"  OnTextChanged="txtSearch_TextChanged" CssClass="form-control " runat="server"></asp:TextBox>
+                        <asp:TextBox ID="SearchBox" AutoPostBack="true" placeholder="Search By Title"  OnTextChanged="txtSearch_TextChanged" CssClass="form-control " runat="server"></asp:TextBox>
                         <asp:Button ID="Search" runat="server" CssClass="btn btn-outline-success" OnClick="btnSearch" Text="Search" />
                     </div>
                 </div>

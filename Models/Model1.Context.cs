@@ -12,11 +12,13 @@ namespace Online_Exam_System.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class OnlineeExamSystemEntities1 : DbContext
+    public partial class OnlineeExamSystemEntities2 : DbContext
     {
-        public OnlineeExamSystemEntities1()
-            : base("name=OnlineeExamSystemEntities1")
+        public OnlineeExamSystemEntities2()
+            : base("name=OnlineeExamSystemEntities2")
         {
         }
     
@@ -33,5 +35,32 @@ namespace Online_Exam_System.Models
         public virtual DbSet<StudentResult> StudentResults { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+    
+        public virtual ObjectResult<GetExamStats_Result> GetExamStats(Nullable<int> examID)
+        {
+            var examIDParameter = examID.HasValue ?
+                new ObjectParameter("ExamID", examID) :
+                new ObjectParameter("ExamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetExamStats_Result>("GetExamStats", examIDParameter);
+        }
+    
+        public virtual int GetStats(Nullable<int> examID)
+        {
+            var examIDParameter = examID.HasValue ?
+                new ObjectParameter("ExamID", examID) :
+                new ObjectParameter("ExamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetStats", examIDParameter);
+        }
+    
+        public virtual ObjectResult<GetStudentExamAnalysis_Result> GetStudentExamAnalysis(Nullable<int> examID)
+        {
+            var examIDParameter = examID.HasValue ?
+                new ObjectParameter("ExamID", examID) :
+                new ObjectParameter("ExamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStudentExamAnalysis_Result>("GetStudentExamAnalysis", examIDParameter);
+        }
     }
 }

@@ -179,6 +179,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetExamStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStudentExamAnalysis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExamID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="OnlineeExamSystemModelStoreContainer">
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
@@ -281,9 +290,9 @@
           <Property Name="StudentID" Type="Int32" Nullable="false" />
           <Property Name="ExamID" Type="Int32" Nullable="false" />
           <Property Name="EnrollmentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsExamCompleted" Type="Boolean" />
           <NavigationProperty Name="Exam" Relationship="Self.FK__StudentEx__ExamI__71D1E811" FromRole="StudentExamEnrollment" ToRole="Exams" />
           <NavigationProperty Name="Student" Relationship="Self.FK__StudentEx__Stude__70DDC3D8" FromRole="StudentExamEnrollment" ToRole="Students" />
-          <Property Name="IsExamCompleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="StudentResult">
           <Key>
@@ -409,7 +418,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OnlineeExamSystemEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OnlineeExamSystemEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Exams" EntityType="Self.Exam" />
           <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
@@ -446,13 +455,37 @@
             <End Role="Students" EntitySet="Students" />
             <End Role="StudentResults" EntitySet="StudentResults" />
           </AssociationSet>
+          <FunctionImport Name="GetExamStats" ReturnType="Collection(OnlineeExamSystemModel.GetExamStats_Result)">
+          <Parameter Name="ExamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStats">
+          <Parameter Name="ExamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentExamAnalysis" ReturnType="Collection(OnlineeExamSystemModel.GetStudentExamAnalysis_Result)">
+          <Parameter Name="ExamID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetExamStats_Result">
+          <Property Type="Int32" Name="TotalCandidates" Nullable="true" />
+          <Property Type="Int32" Name="AttendedCandidates" Nullable="true" />
+          <Property Type="Int32" Name="AbsentCandidates" Nullable="true" />
+          <Property Type="Int32" Name="TotalQuestions" Nullable="true" />
+          <Property Type="Int32" Name="MaxMarks" Nullable="true" />
+          <Property Type="Decimal" Name="PassingMarks" Nullable="true" Precision="12" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="GetStudentExamAnalysis_Result">
+          <Property Type="String" Name="StudentName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="TotalQuestions" Nullable="true" />
+          <Property Type="Int32" Name="TotalCorrect" Nullable="true" />
+          <Property Type="Int32" Name="TotalWrong" Nullable="true" />
+          <Property Type="String" Name="Results" Nullable="false" MaxLength="9" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OnlineeExamSystemModelStoreContainer" CdmEntityContainer="OnlineeExamSystemEntities1">
+        <EntityContainerMapping StorageEntityContainer="OnlineeExamSystemModelStoreContainer" CdmEntityContainer="OnlineeExamSystemEntities2">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="OnlineeExamSystemModel.Admin">
               <MappingFragment StoreEntitySet="Admins">
@@ -504,11 +537,11 @@
           <EntitySetMapping Name="StudentExamEnrollments">
             <EntityTypeMapping TypeName="OnlineeExamSystemModel.StudentExamEnrollment">
               <MappingFragment StoreEntitySet="StudentExamEnrollment">
-                <ScalarProperty Name="IsExamCompleted" ColumnName="IsExamCompleted" />
                 <ScalarProperty Name="EnrollmentID" ColumnName="EnrollmentID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="ExamID" ColumnName="ExamID" />
                 <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
+                <ScalarProperty Name="IsExamCompleted" ColumnName="IsExamCompleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -547,6 +580,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetExamStats" FunctionName="OnlineeExamSystemModel.Store.GetExamStats">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineeExamSystemModel.GetExamStats_Result">
+                <ScalarProperty Name="TotalCandidates" ColumnName="TotalCandidates" />
+                <ScalarProperty Name="AttendedCandidates" ColumnName="AttendedCandidates" />
+                <ScalarProperty Name="AbsentCandidates" ColumnName="AbsentCandidates" />
+                <ScalarProperty Name="TotalQuestions" ColumnName="TotalQuestions" />
+                <ScalarProperty Name="MaxMarks" ColumnName="MaxMarks" />
+                <ScalarProperty Name="PassingMarks" ColumnName="PassingMarks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStats" FunctionName="OnlineeExamSystemModel.Store.GetStats" />
+          <FunctionImportMapping FunctionImportName="GetStudentExamAnalysis" FunctionName="OnlineeExamSystemModel.Store.GetStudentExamAnalysis">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineeExamSystemModel.GetStudentExamAnalysis_Result">
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="TotalQuestions" ColumnName="TotalQuestions" />
+                <ScalarProperty Name="TotalCorrect" ColumnName="TotalCorrect" />
+                <ScalarProperty Name="TotalWrong" ColumnName="TotalWrong" />
+                <ScalarProperty Name="Results" ColumnName="Results" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

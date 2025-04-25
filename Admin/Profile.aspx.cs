@@ -11,7 +11,7 @@ namespace Online_Exam_System.Admin
     
     public partial class Profile : System.Web.UI.Page
     {
-        OnlineeExamSystemEntities1 dbo=new OnlineeExamSystemEntities1();
+        OnlineeExamSystemEntities2 dbo=new OnlineeExamSystemEntities2();
         protected void Page_Load(object sender, EventArgs e)
         {
             var profileInformation = dbo.Admins.Where(x => x.AdminID == 2).FirstOrDefault();

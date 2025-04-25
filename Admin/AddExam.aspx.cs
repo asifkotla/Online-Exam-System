@@ -12,7 +12,7 @@ namespace Online_Exam_System.Admin
 {
     public partial class UploadExam : Page // 🔴 Ensure this extends Page
     {
-        OnlineeExamSystemEntities1 dbo = new OnlineeExamSystemEntities1();
+        OnlineeExamSystemEntities2 dbo = new OnlineeExamSystemEntities2();
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             if (FileUpload1.HasFile)

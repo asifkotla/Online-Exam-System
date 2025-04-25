@@ -10,7 +10,7 @@ namespace Online_Exam_System.Admin
 {
     public partial class AdminPanel : System.Web.UI.MasterPage
     {
-        OnlineeExamSystemEntities1 dbo = new OnlineeExamSystemEntities1();
+        OnlineeExamSystemEntities2 dbo = new OnlineeExamSystemEntities2();
         protected void Page_Load(object sender, EventArgs e)
         {
 

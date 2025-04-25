@@ -97,7 +97,7 @@
                 <a href="ManageUser.aspx" >Manage Users</a>
                 <a href="Manage Exams.aspx" >Manage Exams</a>
                 <a href="Exam Analsis.aspx" >Exam Analsis</a>
-                <a href="Results.aspx" >Results</a>
+                
                   <a href="Profile.aspx" >Profile</a>
             
             </div>

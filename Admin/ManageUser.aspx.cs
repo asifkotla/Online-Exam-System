@@ -25,7 +25,7 @@ namespace Online_Exam_System.Admin
     {
         private DataTable AllUsers;
 
-        OnlineeExamSystemEntities1 dbo = new OnlineeExamSystemEntities1();
+        OnlineeExamSystemEntities2 dbo = new OnlineeExamSystemEntities2();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -84,7 +84,7 @@ namespace Online_Exam_System.Admin
             dt.Columns.Add("UserName");
 
 
-            using (OnlineeExamSystemEntities1 db = new OnlineeExamSystemEntities1())
+            using (OnlineeExamSystemEntities2 db = new OnlineeExamSystemEntities2())
             {
                 var users = db.Students.ToList(); // or db.Users if you're storing in Users table
 
