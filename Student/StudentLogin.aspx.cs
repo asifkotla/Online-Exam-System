@@ -27,6 +27,9 @@ namespace Online_Exam_System.Student
                 if (Utility.VerifyPassword(password1, pass) == true)
                 {
                     Response.Write("<script>alert(' ✅ Succesfully Logged In');</script>");
+                    Session["stdEmailid"] = student.Email;
+                    Session["StdId"] = student.StudentID;
+                    Response.Redirect("~/Student/StdHome.aspx");
                 }
                 else
                 {

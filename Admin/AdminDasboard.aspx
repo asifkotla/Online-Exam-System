@@ -58,7 +58,7 @@
 
       <a href="AddExam.aspx" style="text-decoration: none;">
     <div class="d-flex justify-content-between aling-items-center mb-3">
-        <h2 class="mb-0">Dashboard Overview</h2>
+        <h2 class="mb-0">Home</h2>
        
         <div class="btn btn-primary btnadd  "><i class="fa-solid fa-plus text-primary  cust"></i> Add Exam</div>
     </div>

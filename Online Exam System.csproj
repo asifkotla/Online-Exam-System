@@ -228,6 +228,8 @@
     <Content Include="Admin\ManageUser.aspx" />
     <Content Include="Admin\Profile.aspx" />
     <Content Include="App_Data\herobanner.jpg" />
+    <Content Include="assets\default-profile1.png" />
+    <Content Include="assets\default-profile.jpg" />
     <Content Include="assets\3275434.jpg" />
     <Content Include="assets\4957136_4957136.jpg" />
     <Content Include="assets\6310507.jpg" />
@@ -279,6 +281,8 @@
     <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\manageuser.js" />
     <Content Include="Student\herobanner.jpg" />
+    <Content Include="Student\SProfile.aspx" />
+    <Content Include="Student\StdHome.aspx" />
     <Content Include="Student\StudentLogin.aspx" />
     <Content Include="Student\StyleSheet\StyleHome.css" />
     <Content Include="Web.config" />
@@ -429,6 +433,27 @@
       <DependentUpon>Reply.aspx</DependentUpon>
     </Compile>
     <Compile Include="SendMail.cs" />
+    <Compile Include="Student\SProfile.aspx.cs">
+      <DependentUpon>SProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\SProfile.aspx.designer.cs">
+      <DependentUpon>SProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\StdHome.aspx.cs">
+      <DependentUpon>StdHome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\StdHome.aspx.designer.cs">
+      <DependentUpon>StdHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\StudentDashboard.Master.cs">
+      <DependentUpon>StudentDashboard.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\StudentDashboard.Master.designer.cs">
+      <DependentUpon>StudentDashboard.Master</DependentUpon>
+    </Compile>
     <Compile Include="Student\StudentLogin.aspx.cs">
       <DependentUpon>StudentLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -471,6 +496,7 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Student\StudentDashboard.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
