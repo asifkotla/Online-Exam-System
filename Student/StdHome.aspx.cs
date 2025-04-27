@@ -20,7 +20,7 @@ namespace Online_Exam_System.Student
             Label1.Text = cntenroll.ToString();
             int cntcomp = dbo.StudentExamEnrollments.Where(x => x.StudentID == stdid && x.IsExamCompleted == true).Count();
             Label2.Text = cntcomp.ToString();
-            int cntpending = dbo.StudentExamEnrollments.Where(x => x.StudentID == stdid && x.IsExamCompleted == false).Count();
+            int cntpending = dbo.StudentExamEnrollments.Where(x => x.StudentID == stdid && (x.IsExamCompleted == false|| x.IsExamCompleted == null)).Count();
             Label3.Text = cntpending.ToString();
             if (!IsPostBack)
             {

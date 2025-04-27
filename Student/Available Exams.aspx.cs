@@ -61,7 +61,9 @@ namespace Online_Exam_System.Student
                     {
                         StudentID = studentId,
                         ExamID = examId,
-                        EnrollmentDate = DateTime.Now
+                        EnrollmentDate = DateTime.Now,
+                        IsExamCompleted=false
+                        
                     });
 
                     dbo.SaveChanges();
