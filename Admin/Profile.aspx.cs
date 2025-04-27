@@ -46,7 +46,7 @@ namespace Online_Exam_System.Admin
         protected void btnUpdatePassword_Click(object sender,EventArgs e)
         {
             byte[] pass = Utility.HashPassword(txtNewPassword.Text);
-            int adminid = 2;/*int.Parse(Session["adminid"].ToString());*/
+            int adminid = int.Parse(Session["adminid"].ToString());
             var admindetail = dbo.Admins.Where(x => x.AdminID == adminid).FirstOrDefault();
             admindetail.PasswordHash = pass;
             if (dbo.SaveChanges() > 0)

@@ -5,6 +5,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript">
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = document.getElementById('<%= imgProfileEdit.ClientID %>');
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    </script>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -13,6 +26,7 @@
         <div class="card shadow-lg rounded-4">
             <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center" style="background: linear-gradient(45deg, #007bff, #00c6ff);">
                 <h4 class="mb-0">👤 My Profile</h4>
+                       
                 <asp:Image ID="imgProfile" runat="server" CssClass="rounded-circle" Width="60px" Height="60px" Style="border: 2px solid white;" />
             </div>
 
@@ -60,10 +74,11 @@
                     <div class="text-center mb-4">
                         <asp:Image ID="imgProfileEdit" runat="server" CssClass="rounded-circle" Width="100px" Height="100px" Style="border: 2px solid #ffc107;" />
                         <div class="mt-2">
-                            <asp:FileUpload ID="fuProfilePic" runat="server" CssClass="form-control" />
+                            <asp:FileUpload ID="fuProfilePic" runat="server" CssClass="form-control" onchange="previewImage(this);"/>
                         </div>
                     </div>
                     <div class="mb-3">
+                        <asp:CustomValidator ID="CustomValidator2" runat="server" ControlToValidate="txtUser" Display="Dynamic" ForeColor="Red" ErrorMessage="User Name Is Taken.. Please Try With Different Email.!!!" OnServerValidate="cvCustom_ServerValidate1"    EnableClientScript="true" ></asp:CustomValidator>
                         <label class="fw-semibold">👤 Username</label>
                         <asp:TextBox ID="txtuser" runat="server" CssClass="form-control rounded-3" />
                     </div>
@@ -73,6 +88,8 @@
                     </div>
 
                     <div class="mb-3">
+                    <asp:CustomValidator ID="CustomValidator1" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ForeColor="Red" ErrorMessage="Email Is Already Used Please Try With Different Email.!!!" OnServerValidate="cvCustom_ServerValidate"    EnableClientScript="true" ></asp:CustomValidator>
+
                         <label class="fw-semibold">📧 Email</label>
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control rounded-3" />
                     </div>
