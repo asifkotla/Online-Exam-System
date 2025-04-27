@@ -190,6 +190,13 @@ footer {
         display: none;
     }
 
+    #logo {
+        width: 30px; 
+        height: auto; 
+        border-radius: 50%; 
+        max-width: 100%; 
+     
+    }
     .menu {
         display: block;
     }

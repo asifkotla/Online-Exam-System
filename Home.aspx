@@ -20,7 +20,7 @@
      <form id="form1" runat="server">
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-       <h3>Online Exam System</h3>
+   <img id="logo" class="img-fluid " src="/assets/Owl%20of%20Wisdom.png" alt="LOGO" style="width: 45px; height: auto;  border-radius: 50%;   margin-right: 12px;"/> <h3>QuizNest</h3>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon bars"></span>
@@ -57,7 +57,7 @@
                 <div class="col-md-6 ">
                     <span style="color: #bbb;" class="text-uppercase heading">Are You Ready to Test Your Skills?</span>
                     <!-- on small screens remove display-4 -->
-                    <h1 class="mb-4 mt-2 display-4 font-weight-bold">Online<span style="color: #00b4d8;"> Exam System</span></h1>
+                    <h1 class="mb-4 mt-2 display-4 font-weight-bold"><span style="color: #00b4d8;"> Quiz Nest</span></h1>
                     <p style="color: #bbb;">
                         A smart and secure online exam system designed for seamless assessments.
                         <br />
@@ -93,8 +93,8 @@
             <div class="row align-items-center">
                 <!-- Left Side: About Text -->
                 <div class="col-md-6">
-                    <h2>About Online Exam System</h2>
-                    <p>Our Online Exam System is a secure and user-friendly platform that enables students to take exams online and allows administrators to manage them efficiently.</p>
+                    <h2>About Quiz Nest</h2>
+                    <p>	A cozy place for quizzes and exams.Our Online Exam System is a secure and user-friendly platform that enables students to take exams online and allows administrators to manage them efficiently.</p>
                     <ul>
                         <li>✅ Secure online exams</li>
                         <li>✅ Automatic submission on time expiration</li>
@@ -173,7 +173,7 @@
                     <div class="row">
                         <!-- Grid column -->
                         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">ONLINE EXAM SYSTEM
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Quiz Nest
                             </h6>
                             <p>
                                 A smart and secure online exam system designed for seamless assessments.

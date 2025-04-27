@@ -118,10 +118,10 @@
                 <p class="text-center">&nbsp;</p>
        <img id="imgProfile" runat="server" src="../assets/profile.png" alt="Profile" class="profile-img"
   onerror="this.onerror=null; this.src='../assets/default-profile1.png';" />
-                <a href="#">Home</a>
-                <a href="#" >Available Exams</a>
-                <a href="#" >My Exams</a>
-                <a href="#" >Exam Results</a>
+                <a href="StdHome.aspx">Home</a>
+                <a href="Available Exams.aspx" >Available Exams</a>
+                <a href="MyExams.aspx" >My Exams</a>
+                <a href="ExamResult.aspx" >Exam Results</a>
                 <a href="SProfile.aspx">Profile</a>
             
             </div>

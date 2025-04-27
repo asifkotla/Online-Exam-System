@@ -236,6 +236,7 @@
     <Content Include="assets\8262066.jpg" />
     <Content Include="assets\9129514.jpg" />
     <Content Include="assets\Infinite Loader.gif" />
+    <Content Include="assets\Owl of Wisdom.png" />
     <Content Include="assets\rm222batch3-mind-06.jpg" />
     <Content Include="assets\StyleSheetadminlogon.css" />
     <Content Include="assets\StylestdLogin.css" />
@@ -280,7 +281,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\loader.js" />
     <Content Include="Scripts\manageuser.js" />
+    <Content Include="Student\Available Exams.aspx" />
+    <Content Include="Student\ExamResult.aspx" />
     <Content Include="Student\herobanner.jpg" />
+    <Content Include="Student\MyExams.aspx" />
     <Content Include="Student\SProfile.aspx" />
     <Content Include="Student\StdHome.aspx" />
     <Content Include="Student\StudentLogin.aspx" />
@@ -433,6 +437,27 @@
       <DependentUpon>Reply.aspx</DependentUpon>
     </Compile>
     <Compile Include="SendMail.cs" />
+    <Compile Include="Student\Available Exams.aspx.cs">
+      <DependentUpon>Available Exams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\Available Exams.aspx.designer.cs">
+      <DependentUpon>Available Exams.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\ExamResult.aspx.cs">
+      <DependentUpon>ExamResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\ExamResult.aspx.designer.cs">
+      <DependentUpon>ExamResult.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Student\MyExams.aspx.cs">
+      <DependentUpon>MyExams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Student\MyExams.aspx.designer.cs">
+      <DependentUpon>MyExams.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Student\SProfile.aspx.cs">
       <DependentUpon>SProfile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
