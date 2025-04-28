@@ -19,6 +19,7 @@ namespace Online_Exam_System.Models
         {
             this.StudentExamEnrollments = new HashSet<StudentExamEnrollment>();
             this.StudentResults = new HashSet<StudentResult>();
+            this.StudentAnswers = new HashSet<StudentAnswer>();
         }
     
         public int StudentID { get; set; }
@@ -33,5 +34,7 @@ namespace Online_Exam_System.Models
         public virtual ICollection<StudentExamEnrollment> StudentExamEnrollments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentResult> StudentResults { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentAnswer> StudentAnswers { get; set; }
     }
 }

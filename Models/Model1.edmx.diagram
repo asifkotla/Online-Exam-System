@@ -20,6 +20,10 @@
         <AssociationConnector Association="OnlineeExamSystemModel.FK_Exams_Exams" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentEx__Stude__70DDC3D8" ManuallyRouted="false" />
         <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentRe__Stude__440B1D61" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OnlineeExamSystemModel.StudentAnswer" Width="1.5" PointX="7.5" PointY="7.875" />
+        <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentAn__ExamI__3493CFA7" />
+        <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentAn__Quest__3587F3E0" />
+        <AssociationConnector Association="OnlineeExamSystemModel.FK__StudentAn__Stude__339FAB6E" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

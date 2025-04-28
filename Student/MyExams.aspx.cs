@@ -44,13 +44,24 @@ namespace Online_Exam_System.Student
             rptEnrolledExams.DataBind();
         }
 
-        protected void rptEnrolledExams_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void btnStartExam_Click(object sender, EventArgs e)
         {
-            if (e.CommandName == "StartExam")
+            Button btn = sender as Button;
+            if (btn != null)
             {
-                int examId = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect($"StartExam.aspx?ExamID={examId}");
+                string examIdStr = btn.CommandArgument; // Get ExamID from CommandArgument
+                if (!string.IsNullOrEmpty(examIdStr))
+                {
+                    int examId = Convert.ToInt32(examIdStr);
+                    int studentId = int.Parse(Session["StdId"].ToString());
+
+                    Session["ExamID"] = examId;
+                    Session["UserID"] = studentId;
+
+                    Response.Redirect($"~/ExamPanel/ExamPanel1.aspx");
+                }
             }
         }
+
     }
 }

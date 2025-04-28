@@ -14,6 +14,12 @@ namespace Online_Exam_System.Models
     
     public partial class Question
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Question()
+        {
+            this.StudentAnswers = new HashSet<StudentAnswer>();
+        }
+    
         public int QuestionID { get; set; }
         public Nullable<int> ExamID { get; set; }
         public string QuestionText { get; set; }
@@ -24,5 +30,7 @@ namespace Online_Exam_System.Models
         public string CorrectOption { get; set; }
     
         public virtual Exam Exam { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentAnswer> StudentAnswers { get; set; }
     }
 }

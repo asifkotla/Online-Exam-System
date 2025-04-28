@@ -49,6 +49,17 @@
           <Property Name="OptionD" Type="nvarchar" MaxLength="255" />
           <Property Name="CorrectOption" Type="char" MaxLength="1" />
         </EntityType>
+        <EntityType Name="StudentAnswers">
+          <Key>
+            <PropertyRef Name="StudentAnswerID" />
+          </Key>
+          <Property Name="StudentAnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Studentid" Type="int" />
+          <Property Name="ExamID" Type="int" />
+          <Property Name="QuestionID" Type="int" />
+          <Property Name="SelectedOption" Type="char" MaxLength="1" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="StudentExamEnrollment">
           <Key>
             <PropertyRef Name="EnrollmentID" />
@@ -116,6 +127,42 @@
             </Principal>
             <Dependent Role="Questions">
               <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAn__ExamI__3493CFA7">
+          <End Role="Exams" Type="Self.Exams" Multiplicity="0..1" />
+          <End Role="StudentAnswers" Type="Self.StudentAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="StudentAnswers">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAn__Quest__3587F3E0">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="0..1" />
+          <End Role="StudentAnswers" Type="Self.StudentAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="StudentAnswers">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAn__Stude__339FAB6E">
+          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="StudentAnswers" Type="Self.StudentAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentAnswers">
+              <PropertyRef Name="Studentid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -194,6 +241,7 @@
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentAnswers" EntityType="Self.StudentAnswers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentExamEnrollment" EntityType="Self.StudentExamEnrollment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentResults" EntityType="Self.StudentResults" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
@@ -205,6 +253,18 @@
           <AssociationSet Name="FK__Questions__ExamI__412EB0B6" Association="Self.FK__Questions__ExamI__412EB0B6">
             <End Role="Exams" EntitySet="Exams" />
             <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAn__ExamI__3493CFA7" Association="Self.FK__StudentAn__ExamI__3493CFA7">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="StudentAnswers" EntitySet="StudentAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAn__Quest__3587F3E0" Association="Self.FK__StudentAn__Quest__3587F3E0">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="StudentAnswers" EntitySet="StudentAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAn__Stude__339FAB6E" Association="Self.FK__StudentAn__Stude__339FAB6E">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentAnswers" EntitySet="StudentAnswers" />
           </AssociationSet>
           <AssociationSet Name="FK__StudentEx__ExamI__71D1E811" Association="Self.FK__StudentEx__ExamI__71D1E811">
             <End Role="Exams" EntitySet="Exams" />
@@ -258,6 +318,7 @@
           <NavigationProperty Name="StudentResults" Relationship="Self.FK__StudentRe__ExamI__44FF419A" FromRole="Exams" ToRole="StudentResults" />
           <NavigationProperty Name="Exams1" Relationship="Self.FK_Exams_Exams" FromRole="Exams" ToRole="Exams1" />
           <NavigationProperty Name="Exam1" Relationship="Self.FK_Exams_Exams" FromRole="Exams1" ToRole="Exams" />
+          <NavigationProperty Name="StudentAnswers" Relationship="OnlineeExamSystemModel.FK__StudentAn__ExamI__3493CFA7" FromRole="Exam" ToRole="StudentAnswer" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -282,6 +343,7 @@
           <Property Name="OptionD" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CorrectOption" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Exam" Relationship="Self.FK__Questions__ExamI__412EB0B6" FromRole="Questions" ToRole="Exams" />
+          <NavigationProperty Name="StudentAnswers" Relationship="OnlineeExamSystemModel.FK__StudentAn__Quest__3587F3E0" FromRole="Question" ToRole="StudentAnswer" />
         </EntityType>
         <EntityType Name="StudentExamEnrollment">
           <Key>
@@ -320,6 +382,7 @@
           <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="StudentExamEnrollments" Relationship="Self.FK__StudentEx__Stude__70DDC3D8" FromRole="Students" ToRole="StudentExamEnrollment" />
           <NavigationProperty Name="StudentResults" Relationship="Self.FK__StudentRe__Stude__440B1D61" FromRole="Students" ToRole="StudentResults" />
+          <NavigationProperty Name="StudentAnswers" Relationship="OnlineeExamSystemModel.FK__StudentAn__Stude__339FAB6E" FromRole="Student" ToRole="StudentAnswer" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -466,6 +529,19 @@
           <Parameter Name="ExamID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetOverallResultCounts" ReturnType="Collection(OnlineeExamSystemModel.GetOverallResultCounts_Result)" />
+          <EntitySet Name="StudentAnswers" EntityType="OnlineeExamSystemModel.StudentAnswer" />
+          <AssociationSet Name="FK__StudentAn__ExamI__3493CFA7" Association="OnlineeExamSystemModel.FK__StudentAn__ExamI__3493CFA7">
+            <End Role="Exam" EntitySet="Exams" />
+            <End Role="StudentAnswer" EntitySet="StudentAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAn__Quest__3587F3E0" Association="OnlineeExamSystemModel.FK__StudentAn__Quest__3587F3E0">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="StudentAnswer" EntitySet="StudentAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentAn__Stude__339FAB6E" Association="OnlineeExamSystemModel.FK__StudentAn__Stude__339FAB6E">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentAnswer" EntitySet="StudentAnswers" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetExamStats_Result">
           <Property Type="Int32" Name="TotalCandidates" Nullable="true" />
@@ -488,6 +564,56 @@
           <Property Type="Int32" Name="Passed" Nullable="true" />
           <Property Type="Int32" Name="Failed" Nullable="true" />
         </ComplexType>
+        <EntityType Name="StudentAnswer">
+          <Key>
+            <PropertyRef Name="StudentAnswerID" />
+          </Key>
+          <Property Name="StudentAnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Studentid" Type="Int32" />
+          <Property Name="ExamID" Type="Int32" />
+          <Property Name="QuestionID" Type="Int32" />
+          <Property Name="SelectedOption" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Exam" Relationship="OnlineeExamSystemModel.FK__StudentAn__ExamI__3493CFA7" FromRole="StudentAnswer" ToRole="Exam" />
+          <NavigationProperty Name="Question" Relationship="OnlineeExamSystemModel.FK__StudentAn__Quest__3587F3E0" FromRole="StudentAnswer" ToRole="Question" />
+          <NavigationProperty Name="Student" Relationship="OnlineeExamSystemModel.FK__StudentAn__Stude__339FAB6E" FromRole="StudentAnswer" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__StudentAn__ExamI__3493CFA7">
+          <End Type="OnlineeExamSystemModel.Exam" Role="Exam" Multiplicity="0..1" />
+          <End Type="OnlineeExamSystemModel.StudentAnswer" Role="StudentAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="ExamID" />
+            </Principal>
+            <Dependent Role="StudentAnswer">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAn__Quest__3587F3E0">
+          <End Type="OnlineeExamSystemModel.Question" Role="Question" Multiplicity="0..1" />
+          <End Type="OnlineeExamSystemModel.StudentAnswer" Role="StudentAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="StudentAnswer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentAn__Stude__339FAB6E">
+          <End Type="OnlineeExamSystemModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="OnlineeExamSystemModel.StudentAnswer" Role="StudentAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentAnswer">
+              <PropertyRef Name="Studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -622,6 +748,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="StudentAnswers">
+            <EntityTypeMapping TypeName="OnlineeExamSystemModel.StudentAnswer">
+              <MappingFragment StoreEntitySet="StudentAnswers">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="SelectedOption" ColumnName="SelectedOption" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="Studentid" ColumnName="Studentid" />
+                <ScalarProperty Name="StudentAnswerID" ColumnName="StudentAnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -73,7 +73,7 @@
                             </p>
                             
                             <!-- Start Exam Button -->
-                            <asp:Button ID="btnStartExam" runat="server" Text="Start Exam" CommandName="StartExam" CommandArgument='<%# Eval("ExamID") %>' CssClass="btn btn-success w-100" OnClientClick="return confirm('Are you sure you want to start the exam?')" />
+                           <asp:Button ID="btnStartExam" runat="server" OnClick="btnStartExam_Click" Text="Start Exam" CommandName="StartExam" CommandArgument='<%# Eval("ExamID") %>' CssClass="btn btn-success w-100" OnClientClick="return confirm('Are you sure you want to start the exam?')" />
                         </div>
                     </div>
                 </div>

@@ -38,5 +38,7 @@ namespace Online_Exam_System.Student
             Session.Clear();
             Response.Redirect("~/Home.aspx");
         }
+     
+            
     }
 }

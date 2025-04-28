@@ -66,7 +66,7 @@ namespace Online_Exam_System.Admin
 
                             TimeSpan startTime = dateTime.TimeOfDay;
 
-                            var exam = new Exam
+                            var exam = new Models.Exam
                             {
                                 Title = title,
                                 Duration = duration,

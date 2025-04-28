@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace Online_Exam_System.Student
 {
     public partial class SProfile : System.Web.UI.Page
@@ -66,6 +67,7 @@ namespace Online_Exam_System.Student
                 {
                     Response.Write("<script>alert('✅ Profile Updated Successfully..');</script>");
                     Page_Load(sender, e);
+
                 }
                 else
                 {

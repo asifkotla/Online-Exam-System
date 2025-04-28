@@ -20,6 +20,7 @@ namespace Online_Exam_System.Models
             this.Questions = new HashSet<Question>();
             this.StudentExamEnrollments = new HashSet<StudentExamEnrollment>();
             this.StudentResults = new HashSet<StudentResult>();
+            this.StudentAnswers = new HashSet<StudentAnswer>();
         }
     
         public int ExamID { get; set; }
@@ -39,5 +40,7 @@ namespace Online_Exam_System.Models
         public virtual ICollection<StudentResult> StudentResults { get; set; }
         public virtual Exam Exams1 { get; set; }
         public virtual Exam Exam1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentAnswer> StudentAnswers { get; set; }
     }
 }

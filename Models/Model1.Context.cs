@@ -35,6 +35,7 @@ namespace Online_Exam_System.Models
         public virtual DbSet<StudentResult> StudentResults { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<StudentAnswer> StudentAnswers { get; set; }
     
         public virtual ObjectResult<GetExamStats_Result> GetExamStats(Nullable<int> examID)
         {
