@@ -5,6 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Online Exam Panel</title>
+    <script src="Exampanel/examPapplication.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Highlight selected question
+        $(".question-btn").click(function () {
+            $(".question-btn").removeClass("btn-primary");
+            $(this).addClass("btn-primary");
+        });
+
+        // Optional: Tooltips to explain meaning
+        $(".question-btn").each(function () {
+            const btn = $(this);
+            if (btn.hasClass("btn-success")) {
+                btn.attr("title", "Answered");
+            } else if (btn.hasClass("btn-warning")) {
+                btn.attr("title", "Marked for Review");
+            } else {
+                btn.attr("title", "Not Visited");
+            }
+        });
+
+        // Initialize Bootstrap tooltips (if you're using Bootstrap)
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -84,15 +110,6 @@ onerror="this.onerror=null; this.src='../assets/default-profile1.png';" />
                             <asp:ListItem Text="Option D" Value="D"></asp:ListItem>
                         </asp:RadioButtonList>
 
-                        <%--   <!-- Repeater with Buttons (inside the form) -->
-                        <div class="card p-2" style="height:400px; overflow-y:scroll;">
-                            <asp:Repeater ID="rptQuestions" runat="server">
-                                <ItemTemplate>
-                                    <asp:Button ID="btnQuestion" runat="server" CssClass="btn btn-outline-primary question-btn" 
-                                                Text='<%# Eval("QuestionNo") %>' CommandArgument='<%# Eval("QuestionID") %>' OnClick="btnQuestion_Click" />
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </div>--%>
                     </div>
 
                 </div>
@@ -140,21 +157,7 @@ onerror="this.onerror=null; this.src='../assets/default-profile1.png';" />
         <!-- Bootstrap Bundle -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Custom JavaScript -->
-        <script>
-            document.addEventListener('visibilitychange', function () {
-                if (document.hidden) {
-                    __doPostBack('AutoSubmit', '');
-                }
-            });
 
-            function fullScreen() {
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen();
-                }
-            }
-            window.onload = fullScreen;
-        </script>
     </form>
 </body>
 </html>

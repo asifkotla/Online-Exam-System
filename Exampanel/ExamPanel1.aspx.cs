@@ -1,6 +1,9 @@
-﻿using Online_Exam_System.Models;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using Online_Exam_System.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Web;
@@ -17,6 +20,7 @@ namespace Online_Exam_System.Exampanel
         static Dictionary<int, string> userAnswers = new Dictionary<int, string>(); // QuestionID -> Selected Option
         static int currentQuestionIndex = 0;
         static DateTime examEndTime;
+        static List<int> markedForReview = new List<int>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +43,7 @@ namespace Online_Exam_System.Exampanel
 
                 int examId = Convert.ToInt32(Session["ExamID"]);
                 int userId = Convert.ToInt32(Session["UserID"]);
-               // lblUserName.Text = Session["UserName"].ToString();
+              // lblUserName.Text = Session["UserName"].ToString();
 
                 questionList = db.Questions.Where(q => q.ExamID == examId).ToList();
 
@@ -83,10 +87,11 @@ namespace Online_Exam_System.Exampanel
                 lblQuestionText.Text = q.QuestionText;
 
                 rblOptions.Items.Clear();
-                rblOptions.Items.Add(new ListItem("A) " + q.OptionA, "A"));
-                rblOptions.Items.Add(new ListItem("B) " + q.OptionB, "B"));
-                rblOptions.Items.Add(new ListItem("C) " + q.OptionC, "C"));
-                rblOptions.Items.Add(new ListItem("D) " + q.OptionD, "D"));
+                rblOptions.Items.Add(new System.Web.UI.WebControls.ListItem("A) " + q.OptionA, "A"));
+                rblOptions.Items.Add(new System.Web.UI.WebControls.ListItem("B) " + q.OptionB, "B"));
+                rblOptions.Items.Add(new System.Web.UI.WebControls.ListItem("C) " + q.OptionC, "C"));
+                rblOptions.Items.Add(new System.Web.UI.WebControls.ListItem("D) " + q.OptionD, "D"));
+
 
                 // Highlight previously selected option
                 if (userAnswers.ContainsKey(q.QuestionID))
@@ -114,7 +119,13 @@ namespace Online_Exam_System.Exampanel
         protected void btnMarkReview_Click(object sender, EventArgs e)
         {
             SaveCurrentAnswer();
-            // You can add logic to flag it for Review (optional, store in Session or Dictionary)
+
+            var q = questionList[currentQuestionIndex];
+            if (!markedForReview.Contains(q.QuestionID))
+            {
+                markedForReview.Add(q.QuestionID);
+            }
+
             if (currentQuestionIndex < questionList.Count - 1)
             {
                 currentQuestionIndex++;
@@ -126,8 +137,12 @@ namespace Online_Exam_System.Exampanel
         protected void btnClearResponse_Click(object sender, EventArgs e)
         {
             var q = questionList[currentQuestionIndex];
+
             if (userAnswers.ContainsKey(q.QuestionID))
                 userAnswers.Remove(q.QuestionID);
+
+            if (markedForReview.Contains(q.QuestionID))
+                markedForReview.Remove(q.QuestionID);
 
             rblOptions.ClearSelection();
             UpdateBadges();
@@ -156,17 +171,17 @@ namespace Online_Exam_System.Exampanel
             currentQuestionIndex = questionList.FindIndex(x => x.QuestionID == qId);
             LoadQuestion();
         }
-
         private void UpdateBadges()
         {
             int answered = userAnswers.Count;
-            int notVisited = questionList.Count - answered;
-            int notAnswered = questionList.Count(x => !userAnswers.ContainsKey(x.QuestionID));
+            int marked = markedForReview.Count;
+            int notAnswered = questionList.Count(q => !userAnswers.ContainsKey(q.QuestionID));
+            int notVisited = questionList.Count - answered - marked;
 
             lblAnswered.Text = answered.ToString();
             lblNotAnswered.Text = notAnswered.ToString();
             lblNotVisited.Text = notVisited.ToString();
-            // lblMarkedReview.Text = ... (if you track marked questions separately)
+            lblMarkedReview.Text = marked.ToString(); // Assuming you have this label
         }
 
         private void SubmitExam()
@@ -201,7 +216,87 @@ namespace Online_Exam_System.Exampanel
         }
         private void GeneratePDF()
         {
+            int userId = Convert.ToInt32(Session["UserID"]);
+            int examId = Convert.ToInt32(Session["ExamID"]);
+            var student = db.Students.FirstOrDefault(s => s.StudentID == userId);
+            var exam = db.Exams.FirstOrDefault(e => e.ExamID == examId);
 
+            // File name generation
+            string fileName = $"{student.FullName.Replace(" ", "_")}_{exam.Title}_Result.pdf";
+            string directoryPath = Server.MapPath("~/Results/");
+
+            // Ensure directory exists
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            string filePath = Path.Combine(directoryPath, fileName);
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                Document doc = new Document(PageSize.A4, 36f, 36f, 180f, 36f); // header space
+                PdfWriter writer = PdfWriter.GetInstance(doc, fs);
+
+                // Add header
+                writer.PageEvent = new PDFHeaderFooter(exam.Title);
+
+                doc.Open();
+
+                // Student Details
+                doc.Add(new Paragraph($"Student Name: {student.FullName}", FontFactory.GetFont("Arial", 12)));
+                doc.Add(new Paragraph($"Email: {student.Email}", FontFactory.GetFont("Arial", 12)));
+                doc.Add(new Paragraph($"Date: {DateTime.Now:dd MMMM yyyy hh:mm tt}", FontFactory.GetFont("Arial", 12)));
+                doc.Add(new Chunk("\n"));
+
+                // Table setup
+                PdfPTable table = new PdfPTable(4);
+                table.WidthPercentage = 100;
+                table.SetWidths(new float[] { 10, 50, 20, 20 });
+
+                // Table Header
+                Font headerFont = FontFactory.GetFont("Arial", 12, Font.BOLD);
+                table.AddCell(new PdfPCell(new Phrase("No", headerFont)));
+                table.AddCell(new PdfPCell(new Phrase("Question", headerFont)));
+                table.AddCell(new PdfPCell(new Phrase("Your Answer", headerFont)));
+                table.AddCell(new PdfPCell(new Phrase("Correct Answer", headerFont)));
+
+                int counter = 1, correct = 0, wrong = 0;
+
+                foreach (var q in questionList)
+                {
+                    string selected = userAnswers.ContainsKey(q.QuestionID) ? userAnswers[q.QuestionID] : "Not Answered";
+                    string correctAns = q.CorrectOption;
+                    bool isCorrect = selected == correctAns;
+
+                    if (selected != "Not Answered")
+                    {
+                        if (isCorrect) correct++;
+                        else wrong++;
+                    }
+
+                    table.AddCell(counter.ToString());
+                    table.AddCell(q.QuestionText);
+                    table.AddCell(selected);
+                    table.AddCell(correctAns);
+                    counter++;
+                }
+
+                doc.Add(table);
+                doc.Add(new Chunk("\n"));
+
+                // Summary
+                Font summaryFont = FontFactory.GetFont("Arial", 12, Font.BOLD);
+                doc.Add(new Paragraph($"Total Questions: {questionList.Count}", summaryFont));
+                doc.Add(new Paragraph($"Attempted: {userAnswers.Count}", summaryFont));
+                doc.Add(new Paragraph($"Correct Answers: {correct}", summaryFont));
+                doc.Add(new Paragraph($"Wrong Answers: {wrong}", summaryFont));
+
+                doc.Close();
+            }
+
+            // Save the path in session
+            Session["ResultPDFPath"] = "~/Results/" + fileName;
         }
 
     }

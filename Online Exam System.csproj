@@ -259,6 +259,8 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\loader.css" />
     <Content Include="Exampanel\ExamPanel1.aspx" />
+    <Content Include="Exampanel\examPapplication.js" />
+    <Content Include="Exampanel\ThankYou.aspx" />
     <Content Include="Forgetpassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
@@ -362,6 +364,14 @@
     </Compile>
     <Compile Include="Exampanel\ExamPanel1.aspx.designer.cs">
       <DependentUpon>ExamPanel1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Exampanel\PDFHeaderFooter.cs" />
+    <Compile Include="Exampanel\ThankYou.aspx.cs">
+      <DependentUpon>ThankYou.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Exampanel\ThankYou.aspx.designer.cs">
+      <DependentUpon>ThankYou.aspx</DependentUpon>
     </Compile>
     <Compile Include="Forgetpassword.aspx.cs">
       <DependentUpon>Forgetpassword.aspx</DependentUpon>
