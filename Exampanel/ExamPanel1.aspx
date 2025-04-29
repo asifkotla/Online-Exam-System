@@ -43,8 +43,15 @@
                 </a>
 
                 <div class="d-flex align-items-center">
-                    <asp:Label ID="lblTimer" runat="server" CssClass="timer me-3"></asp:Label>
-                 <%--   <img src="profile-pic.jpg" alt="Profile" class="rounded-circle" width="40" height="40" />--%>
+                  
+             <asp:ScriptManager ID="ScriptManager1" runat="server" />
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
+          <asp:Label ID="Label1" runat="server" CssClass="bagde bg-success rounded p-1"> Time Left</asp:Label>
+  <asp:Label ID="lblTimer" runat="server" CssClass="timer me-3"></asp:Label>
+        <asp:Timer ID="ExamTimer" runat="server" Interval="1000" OnTick="ExamTimer_Tick"></asp:Timer>
+    </ContentTemplate>
+</asp:UpdatePanel>
                          <img id="imgProfile" runat="server" src="../assets/profile.png" alt="Profile" width="40" height="40" class="rounded-circle"
 onerror="this.onerror=null; this.src='../assets/default-profile1.png';" />
                     <asp:Label ID="lblUserName" runat="server" Text="Label" CssClass="text-white ms-2"></asp:Label>
@@ -126,13 +133,8 @@ onerror="this.onerror=null; this.src='../assets/default-profile1.png';" />
             <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-danger" OnClick="btnSubmit_Click" />
         </div>
 
-        <!-- ASP.NET Timer for Countdown --><asp:ScriptManager ID="ScriptManager1" runat="server" />
-<asp:UpdatePanel ID="UpdatePanel1" runat="server">
-    <ContentTemplate>
-        <asp:Label ID="Label1" runat="server" CssClass="timer me-3"></asp:Label>
-        <asp:Timer ID="ExamTimer" runat="server" Interval="1000" OnTick="ExamTimer_Tick"></asp:Timer>
-    </ContentTemplate>
-</asp:UpdatePanel>
+        <!-- ASP.NET Timer for Countdown -->
+
 
 
         <!-- Bootstrap Bundle -->
