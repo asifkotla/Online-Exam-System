@@ -20,7 +20,7 @@
      <form id="form1" runat="server">
    <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-   <img id="logo" class="img-fluid " src="/assets/Owl%20of%20Wisdom.png" alt="LOGO" style="width: 45px; height: auto;  border-radius: 50%;   margin-right: 12px;"/> <h3>QuizNest</h3>
+   <img id="logo" class="img-fluid " src="/assets/Owl%20of%20Wisdom1.png" alt="LOGO" style="width: 55px; height: auto;     margin-right: 5px;"/> <h3>QuizNest</h3>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon bars"></span>

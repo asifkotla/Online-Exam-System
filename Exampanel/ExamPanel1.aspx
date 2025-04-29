@@ -129,14 +129,19 @@
                     </div>
                     <!-- Repeater with Buttons (inside the form) -->
 
-                    <div class="card p-2 " style="height: 400px; overflow-y: scroll;">
-                        <asp:Repeater ID="rptQuestions" runat="server">
-                            <ItemTemplate>
-                                <asp:Button ID="btnQuestion" runat="server" CssClass="btn btn-outline-primary question-btn"
-                                    Text='<%# Eval("QuestionNo") %>' CommandArgument='<%# Eval("QuestionID") %>' OnClick="btnQuestion_Click" />
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
+                <div class="card p-2" style="height: 400px; overflow-y: scroll;">
+    <div class="d-flex flex-wrap gap-2">
+        <asp:Repeater ID="rptQuestions" runat="server">
+            <ItemTemplate>
+                <asp:Button ID="btnQuestion" runat="server"
+                    CssClass="btn btn-outline-primary question-btn"
+                    Text='<%# Eval("QuestionNo") %>'
+                    CommandArgument='<%# Eval("QuestionID") %>'
+                    OnClick="btnQuestion_Click" />
+            </ItemTemplate>
+        </asp:Repeater>
+    </div>
+</div>
                 </div>
 
             </div>
