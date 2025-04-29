@@ -7,30 +7,30 @@
     <title>Online Exam Panel</title>
     <script src="Exampanel/examPapplication.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Highlight selected question
-        $(".question-btn").click(function () {
-            $(".question-btn").removeClass("btn-primary");
-            $(this).addClass("btn-primary");
-        });
+    <script>
+        $(document).ready(function () {
+            // Highlight selected question
+            $(".question-btn").click(function () {
+                $(".question-btn").removeClass("btn-primary");
+                $(this).addClass("btn-primary");
+            });
 
-        // Optional: Tooltips to explain meaning
-        $(".question-btn").each(function () {
-            const btn = $(this);
-            if (btn.hasClass("btn-success")) {
-                btn.attr("title", "Answered");
-            } else if (btn.hasClass("btn-warning")) {
-                btn.attr("title", "Marked for Review");
-            } else {
-                btn.attr("title", "Not Visited");
-            }
-        });
+            // Optional: Tooltips to explain meaning
+            $(".question-btn").each(function () {
+                const btn = $(this);
+                if (btn.hasClass("btn-success")) {
+                    btn.attr("title", "Answered");
+                } else if (btn.hasClass("btn-warning")) {
+                    btn.attr("title", "Marked for Review");
+                } else {
+                    btn.attr("title", "Not Visited");
+                }
+            });
 
-        // Initialize Bootstrap tooltips (if you're using Bootstrap)
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
+            // Initialize Bootstrap tooltips (if you're using Bootstrap)
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -65,21 +65,22 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                 <img id="logo" class="img-fluid " src="/assets/Owl%20of%20Wisdom.png" alt="LOGO" style="width: 45px; height: auto;  border-radius: 50%;   margin-right: 12px;"/> <h3>QuizNest</h3>
+                    <img id="logo" class="img-fluid " src="/assets/Owl%20of%20Wisdom.png" alt="LOGO" style="width: 45px; height: auto; border-radius: 50%; margin-right: 12px;" />
+                    <h3>QuizNest</h3>
                 </a>
 
                 <div class="d-flex align-items-center">
-                  
-             <asp:ScriptManager ID="ScriptManager1" runat="server" />
-<asp:UpdatePanel ID="UpdatePanel1" runat="server">
-    <ContentTemplate>
-          <asp:Label ID="Label1" runat="server" CssClass="bagde bg-success rounded p-1"> Time Left</asp:Label>
-  <asp:Label ID="lblTimer" runat="server" CssClass="timer me-3"></asp:Label>
-        <asp:Timer ID="ExamTimer" runat="server" Interval="1000" OnTick="ExamTimer_Tick"></asp:Timer>
-    </ContentTemplate>
-</asp:UpdatePanel>
-                         <img id="imgProfile" runat="server" src="../assets/profile.png" alt="Profile" width="40" height="40" class="rounded-circle"
-onerror="this.onerror=null; this.src='../assets/default-profile1.png';" />
+
+                    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <asp:Label ID="Label1" runat="server" CssClass="bagde bg-success rounded p-1"> Time Left</asp:Label>
+                            <asp:Label ID="lblTimer" runat="server" CssClass="timer me-3"></asp:Label>
+                            <asp:Timer ID="ExamTimer" runat="server" Interval="1000" OnTick="ExamTimer_Tick"></asp:Timer>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <img id="imgProfile" runat="server" src="../assets/profile.png" alt="Profile" width="40" height="40" class="rounded-circle"
+                        onerror="this.onerror=null; this.src='../assets/default-profile1.png';" />
                     <asp:Label ID="lblUserName" runat="server" Text="Label" CssClass="text-white ms-2"></asp:Label>
                 </div>
             </div>
@@ -126,21 +127,21 @@ onerror="this.onerror=null; this.src='../assets/default-profile1.png';" />
                         <span class="badge bg-primary mb-2 d-block">Marked for Review:
                             <asp:Label ID="lblMarkedReview" runat="server" Text="0"></asp:Label></span>
                     </div>
-                            <!-- Repeater with Buttons (inside the form) -->
-     
-        <div class="card p-2 " style="height: 400px; overflow-y: scroll;">
-            <asp:Repeater ID="rptQuestions" runat="server">
-                <ItemTemplate>
-                    <asp:Button ID="btnQuestion" runat="server" CssClass="btn btn-outline-primary question-btn"
-                        Text='<%# Eval("QuestionNo") %>' CommandArgument='<%# Eval("QuestionID") %>' OnClick="btnQuestion_Click" />
-                </ItemTemplate>
-            </asp:Repeater>
-        </div>
-         </div>
- 
-</div>
+                    <!-- Repeater with Buttons (inside the form) -->
+
+                    <div class="card p-2 " style="height: 400px; overflow-y: scroll;">
+                        <asp:Repeater ID="rptQuestions" runat="server">
+                            <ItemTemplate>
+                                <asp:Button ID="btnQuestion" runat="server" CssClass="btn btn-outline-primary question-btn"
+                                    Text='<%# Eval("QuestionNo") %>' CommandArgument='<%# Eval("QuestionID") %>' OnClick="btnQuestion_Click" />
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
                 </div>
-                
+
+            </div>
+        </div>
+
 
         <!-- Footer Buttons -->
         <div class="bg-light text-center p-3 fixed-bottom">

@@ -236,6 +236,14 @@
         <Function Name="GetStudentExamAnalysis" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ExamID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetStudentExamAnswers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentID" Type="int" Mode="In" />
+          <Parameter Name="ExamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStudentExamStats" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentID" Type="int" Mode="In" />
+          <Parameter Name="ExamID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="OnlineeExamSystemModelStoreContainer">
           <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
@@ -542,6 +550,18 @@
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentAnswer" EntitySet="StudentAnswers" />
           </AssociationSet>
+          <FunctionImport Name="GetStudentExamReportWithStats" ReturnType="Collection(OnlineeExamSystemModel.GetStudentExamReportWithStats_Result)">
+            <Parameter Name="StudentID" Mode="In" Type="Int32" />
+            <Parameter Name="ExamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentExamAnswers" ReturnType="Collection(OnlineeExamSystemModel.GetStudentExamAnswers_Result)">
+            <Parameter Name="StudentID" Mode="In" Type="Int32" />
+            <Parameter Name="ExamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentExamStats" ReturnType="Collection(OnlineeExamSystemModel.GetStudentExamStats_Result)">
+            <Parameter Name="StudentID" Mode="In" Type="Int32" />
+            <Parameter Name="ExamID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetExamStats_Result">
           <Property Type="Int32" Name="TotalCandidates" Nullable="true" />
@@ -614,6 +634,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetStudentExamReportWithStats_Result">
+          <Property Type="Int32" Name="QuestionID" Nullable="false" />
+          <Property Type="String" Name="QuestionText" Nullable="true" />
+          <Property Type="String" Name="CorrectOptionText" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SelectedOptionText" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetStudentExamAnswers_Result">
+          <Property Type="Int32" Name="QuestionID" Nullable="false" />
+          <Property Type="String" Name="QuestionText" Nullable="true" />
+          <Property Type="String" Name="CorrectOptionText" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="SelectedOptionText" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetStudentExamStats_Result">
+          <Property Type="Int32" Name="TotalQuestions" Nullable="true" />
+          <Property Type="Int32" Name="Attempted" Nullable="true" />
+          <Property Type="Int32" Name="Correct" Nullable="true" />
+          <Property Type="Int32" Name="Wrong" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -760,6 +798,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetStudentExamAnswers" FunctionName="OnlineeExamSystemModel.Store.GetStudentExamAnswers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineeExamSystemModel.GetStudentExamAnswers_Result">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="CorrectOptionText" ColumnName="CorrectOptionText" />
+                <ScalarProperty Name="SelectedOptionText" ColumnName="SelectedOptionText" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudentExamStats" FunctionName="OnlineeExamSystemModel.Store.GetStudentExamStats">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineeExamSystemModel.GetStudentExamStats_Result">
+                <ScalarProperty Name="TotalQuestions" ColumnName="TotalQuestions" />
+                <ScalarProperty Name="Attempted" ColumnName="Attempted" />
+                <ScalarProperty Name="Correct" ColumnName="Correct" />
+                <ScalarProperty Name="Wrong" ColumnName="Wrong" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

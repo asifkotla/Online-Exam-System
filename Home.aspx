@@ -65,7 +65,7 @@
                     </p>
                     <div class="mt-5">
                         <!-- hover background-color: white; color: black; -->
-                        <a href="StudentLogin.aspx" class="custom-btn">Get Started</a>
+                        <a href="Student/StudentLogin.aspx" class="custom-btn">Get Started</a>
                     </div>
                 </div>
             </div>

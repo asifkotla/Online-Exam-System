@@ -23,7 +23,7 @@
     
 <div class="container mt-5">
     <h2 class="mb-4">My Exams</h2>
-    <asp:Repeater ID="rptExamResults" runat="server">
+    <asp:Repeater ID="rptExamResults" runat="server" OnItemCommand="rptExamResults_ItemCommand">
         <ItemTemplate>
             <div class="card shadow-sm mb-4">
                 <div class="card-body">

@@ -68,5 +68,44 @@ namespace Online_Exam_System.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetOverallResultCounts_Result>("GetOverallResultCounts");
         }
+    
+        public virtual ObjectResult<GetStudentExamReportWithStats_Result> GetStudentExamReportWithStats(Nullable<int> studentID, Nullable<int> examID)
+        {
+            var studentIDParameter = studentID.HasValue ?
+                new ObjectParameter("StudentID", studentID) :
+                new ObjectParameter("StudentID", typeof(int));
+    
+            var examIDParameter = examID.HasValue ?
+                new ObjectParameter("ExamID", examID) :
+                new ObjectParameter("ExamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStudentExamReportWithStats_Result>("GetStudentExamReportWithStats", studentIDParameter, examIDParameter);
+        }
+    
+        public virtual ObjectResult<GetStudentExamAnswers_Result> GetStudentExamAnswers(Nullable<int> studentID, Nullable<int> examID)
+        {
+            var studentIDParameter = studentID.HasValue ?
+                new ObjectParameter("StudentID", studentID) :
+                new ObjectParameter("StudentID", typeof(int));
+    
+            var examIDParameter = examID.HasValue ?
+                new ObjectParameter("ExamID", examID) :
+                new ObjectParameter("ExamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStudentExamAnswers_Result>("GetStudentExamAnswers", studentIDParameter, examIDParameter);
+        }
+    
+        public virtual ObjectResult<GetStudentExamStats_Result> GetStudentExamStats(Nullable<int> studentID, Nullable<int> examID)
+        {
+            var studentIDParameter = studentID.HasValue ?
+                new ObjectParameter("StudentID", studentID) :
+                new ObjectParameter("StudentID", typeof(int));
+    
+            var examIDParameter = examID.HasValue ?
+                new ObjectParameter("ExamID", examID) :
+                new ObjectParameter("ExamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStudentExamStats_Result>("GetStudentExamStats", studentIDParameter, examIDParameter);
+        }
     }
 }

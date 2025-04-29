@@ -22,6 +22,7 @@ namespace Online_Exam_System.Exampanel
         static DateTime examEndTime;
         static List<int> markedForReview = new List<int>();
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string email = Session["stdEmailid"].ToString();
@@ -214,6 +215,22 @@ namespace Online_Exam_System.Exampanel
 
             Response.Redirect("ThankYou.aspx"); // Or wherever you want after exam submit
         }
+        private string GetOptionText(Question q, string optionLetter)
+        {
+            switch (optionLetter)
+            {
+                case "A":
+                    return q.OptionA;
+                case "B":
+                    return q.OptionB;
+                case "C":
+                    return q.OptionC;
+                case "D":
+                    return q.OptionD;
+                default:
+                    return "Not Available";
+            }
+        }
         private void GeneratePDF()
         {
             int userId = Convert.ToInt32(Session["UserID"]);
@@ -222,7 +239,7 @@ namespace Online_Exam_System.Exampanel
             var exam = db.Exams.FirstOrDefault(e => e.ExamID == examId);
 
             // File name generation
-            string fileName = $"{student.FullName.Replace(" ", "_")}_{exam.Title}_Result.pdf";
+            string fileName = $"{student.FullName.Replace(" ", "_")}_Result.pdf";
             string directoryPath = Server.MapPath("~/Results/");
 
             // Ensure directory exists
@@ -265,8 +282,8 @@ namespace Online_Exam_System.Exampanel
 
                 foreach (var q in questionList)
                 {
-                    string selected = userAnswers.ContainsKey(q.QuestionID) ? userAnswers[q.QuestionID] : "Not Answered";
-                    string correctAns = q.CorrectOption;
+                    string selected = userAnswers.ContainsKey(q.QuestionID) ? GetOptionText(q, userAnswers[q.QuestionID]) : "Not Answered"; 
+                    string correctAns = GetOptionText(q, q.CorrectOption);
                     bool isCorrect = selected == correctAns;
 
                     if (selected != "Not Answered")
@@ -281,7 +298,21 @@ namespace Online_Exam_System.Exampanel
                     table.AddCell(correctAns);
                     counter++;
                 }
-
+                //-------------------------------------------------------------
+                StudentResult stdr=new StudentResult()
+                {
+                    StudentID=userId,
+                    ExamID=examId,
+                    Score=correct,
+                    DateTaken=DateTime.Now,
+                };
+                db.StudentResults.Add(stdr);
+                db.SaveChanges();   
+                //-------------------------------------------------------------
+                var enrollordstudent=db.StudentExamEnrollments.Where(x => x.StudentID == userId&&x.ExamID==examId).FirstOrDefault();
+                enrollordstudent.IsExamCompleted = true;
+                db.SaveChanges();
+                //-------------------------------------------------------------
                 doc.Add(table);
                 doc.Add(new Chunk("\n"));
 

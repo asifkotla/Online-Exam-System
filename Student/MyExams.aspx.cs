@@ -25,7 +25,7 @@ namespace Online_Exam_System.Student
             int studentId = int.Parse(Session["StdId"].ToString());
 
             var enrolledExams = dbo.StudentExamEnrollments
-                                    .Where(se => se.StudentID == studentId)
+                                    .Where(se => se.StudentID == studentId &&(se.IsExamCompleted==false||se.IsExamCompleted==null))
                                     .Join(dbo.Exams,
                                           enrollment => enrollment.ExamID,
                                           exam => exam.ExamID,
