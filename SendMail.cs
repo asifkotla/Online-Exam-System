@@ -14,8 +14,8 @@ namespace Online_Exam_System
         public string Body { get; set; }
 
 
-        string fromemail = "employeeemanagementsystem@gmail.com";
-        string frompass = "hnnq loam hhja romh";
+        string fromemail = "your email id";
+        string frompass = "email app pasword";
 
         public void SendEmail(SendMail sendMail)
         {
